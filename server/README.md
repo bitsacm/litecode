@@ -1,0 +1,1 @@
+# Backend for the Litecode web application
