@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -23,6 +24,15 @@ const userSchema = new mongoose.Schema({
             // }
         }
     },
+    phoneNo: {
+        type: String,
+        required: true,
+        validate(value){
+            if (!validator.isMobilePhone(value, ['en-IN'])) {
+                throw new Error('Invalid Mobile')
+            }
+        }
+    },
     username: {
         type: String,
         required: true,
@@ -34,6 +44,23 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true,
         minLength: 8
+    },
+    bio: {
+        type: String,
+        trim: true
+    },
+    avatar: {
+        type: Buffer
+    },
+    inRoom: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    roomID: {
+        type: String,
+        required: true,
+        default: "nil"
     },
     tokens: [{
         token: {
