@@ -4,14 +4,15 @@ const roomSchema = new mongoose.Schema({
     roomID:{
         type: String
     },
-    // roomSize: {
-    //     type: Number
-    // },
     usersInRoom: {
         type: Number
     },
     roomFull: {
         type: Boolean
+    },
+    roomAdmin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 

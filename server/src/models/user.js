@@ -49,6 +49,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    yearOfStudy:{
+        type: String,
+        required: true
+    },
     avatar: {
         type: Buffer
     },
