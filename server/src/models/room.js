@@ -2,13 +2,22 @@ const mongoose = require("mongoose");
 
 const roomSchema = new mongoose.Schema({
     roomID:{
-        type: String
+        type: String,
+        required: true
     },
     usersInRoom: {
-        type: Number
+        type: Number,
+        default: 0
     },
+    users:[{
+        userID:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     roomFull: {
-        type: Boolean
+        type: Boolean,
+        default: false,
     },
     roomAdmin: {
         type: mongoose.Schema.Types.ObjectId,
