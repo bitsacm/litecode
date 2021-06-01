@@ -46,7 +46,7 @@ router.post('/users/logout', auth, async (req, res) => {
 // @access  Private
 router.get('/users/me', auth, async (req, res) => {
     const user = req.user
-    res.json({user})
+    res.json({ user })
 })
 
 // @desc    Upload avatar
@@ -55,7 +55,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
     req.user.avatar = await sharp(req.file.buffer).resize(250, 250).png().toBuffer()
     await req.user.save()
     res.send()
-}, (err, req, res, next) => { 
+}, (err, req, res, next) => {
     res.status(400).send({ error: err.message })
 })
 
@@ -63,10 +63,10 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 // @access  Private
 router.get('/users/me/avatar', auth, async (req, res) => {
     try {
-        if(!req.user.avatar){
+        if (!req.user.avatar) {
             return res.json({ errors: [{ msg: 'No Profile Pic Uploaded' }] })
         }
-        res.set('Content-Type','image/png')
+        res.set('Content-Type', 'image/png')
         res.send(req.user.avatar)
     } catch (err) {
         console.log(err)
@@ -80,6 +80,18 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     req.user.avatar = ''.toBuffer
     await req.user.save()
     res.send()
+})
+
+// @desc    DEL user
+// @access  Private
+router.delete('/users/me', auth, async (req, res) => {
+    try {
+        await req.user.remove()
+        res.json({ msg: 'User deleted successfully' })
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(err)
+    }
 })
 
 module.exports = router

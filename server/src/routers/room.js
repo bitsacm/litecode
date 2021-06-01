@@ -1,7 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const Room = require('../models/room')
-const crypto = require("crypto");
+const crypto = require("crypto")
 const auth = require('../middleware/auth')
 
 // @desc    Create New Room
@@ -22,11 +22,22 @@ router.post('/createRoom', async (req, res) => {
     res.status(201).json(room)
 })
 
+// @desc    GET all rooms which are not full
+// @access  Private
+router.get('/rooms', auth, async (req, res) => {
+    try {
+        const rooms = await Room.find({ roomFull: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
+        res.status(200).json(rooms)
+    } catch (err) {
+        res.status(400).send(err)
+    }
+})
+
 // @desc    GET room details
 // @access  Private
 router.get('/room/:id', auth, async (req, res) => {
     const id = req.params.id
-    const room = await Room.findOne({ roomID: id })
+    const room = await Room.findOne({ roomID: id }).populate('users.userID')
     if (room) {
         res.status(200).json({ room })
     }
@@ -82,6 +93,7 @@ router.post('/leaveRoom', auth, async (req, res) => {
         }
 
         const room = await Room.findOne({ roomID: req.user.roomID })
+
         req.user.inRoom = false
         req.user.roomID = "nil"
         room.usersInRoom--
@@ -91,11 +103,11 @@ router.post('/leaveRoom', auth, async (req, res) => {
             return !user.userID.equals(req.user._id)//If the id isn't equal, it stays in the array.
         })
 
-        if(room.roomAdmin.equals(req.user._id)){
-            if(room.usersInRoom){
+        if (room.roomAdmin.equals(req.user._id)) {
+            if (room.usersInRoom) {
                 room.roomAdmin = room.users[0].userID
             }
-            else{
+            else {
                 room.roomAdmin = null
             }
         }
@@ -103,8 +115,9 @@ router.post('/leaveRoom', auth, async (req, res) => {
         await req.user.save()
         await room.save()
 
-        res.status(200).json({msg: 'Room left'})
+        res.status(200).json({ msg: 'Room left' })
     } catch (err) {
+        console.log(err)
         res.status(400).send(err)
     }
 })

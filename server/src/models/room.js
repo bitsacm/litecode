@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const roomSchema = new mongoose.Schema({
-    roomID:{
+    roomID: {
         type: String,
         required: true
     },
@@ -9,8 +9,8 @@ const roomSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    users:[{
-        userID:{
+    users: [{
+        userID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
@@ -21,7 +21,6 @@ const roomSchema = new mongoose.Schema({
     },
     roomAdmin: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
     }
 })
 

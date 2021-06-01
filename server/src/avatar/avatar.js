@@ -8,7 +8,7 @@ const upload = multer({
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(new Error('Please upload an image file. Supported extensions are jpg, jpeg and png'))
         }
-        cb(null,true)
+        cb(null, true)
     }
 })
 

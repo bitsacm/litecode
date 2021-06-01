@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Room = require('../models/room')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -27,7 +28,7 @@ const userSchema = new mongoose.Schema({
     phoneNo: {
         type: String,
         required: true,
-        validate(value){
+        validate(value) {
             if (!validator.isMobilePhone(value, ['en-IN'])) {
                 throw new Error('Invalid Mobile')
             }
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    yearOfStudy:{
+    yearOfStudy: {
         type: String,
         required: true
     },
@@ -92,7 +93,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.statics.findByCredentials = async (username, password) => {
     const user = await User.findOne({ username })
-    if(!user) throw new Error('Unable to login!')
+    if (!user) throw new Error('Unable to login!')
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) throw new Error('Unable to login!')
     return user
@@ -101,6 +102,32 @@ userSchema.statics.findByCredentials = async (username, password) => {
 userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 8)
+    }
+    next()
+})
+
+userSchema.pre('remove', async function (next) {
+    if (this.inRoom) {
+        roomID = this.roomID
+        const room = await Room.findOne({ roomID })
+
+        room.usersInRoom--
+        room.roomFull = false
+
+        room.users = room.users.filter((user) => {
+            return !user.userID.equals(this._id)//If the id isn't equal, it stays in the array.
+        })
+
+        if (room.roomAdmin.equals(this._id)) {
+            if (room.usersInRoom) {
+                room.roomAdmin = room.users[0].userID
+            }
+            else {
+                room.roomAdmin = null
+            }
+        }
+
+        await room.save()
     }
     next()
 })
