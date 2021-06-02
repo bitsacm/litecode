@@ -1,5 +1,4 @@
-import React from 'react'
-import { Heading } from '@chakra-ui/react'
+import React, {Fragment} from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout'
@@ -8,12 +7,13 @@ import Landing from './screens/Landing';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Room from './screens/Room';
+import Profile from './screens/Profile';
 
 
 function App() {
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const hasRoom = false;
 
   return (
@@ -32,12 +32,24 @@ function App() {
             <Signup />
           </Route>
 
+          <Route path="/signup">
+            <Profile />
+          </Route>
+
           <Route path="/room">
-            {hasRoom ? <Room /> : <Redirect to="/allrooms" />}
+            {isLoggedIn ? 
+            <Fragment>
+              {hasRoom ? <Room /> : <Redirect to="/allrooms" />}
+            </Fragment> : 
+            <Redirect to="/" />}
           </Route>
 
           <Route path="/allrooms">
-            {hasRoom ?  <Redirect to="/room" /> : <AllRooms />}
+            {isLoggedIn ? 
+            <Fragment>
+              {hasRoom ? <Redirect to="/room" /> : <AllRooms />}
+            </Fragment> :
+            <Redirect to="/" />}
           </Route>
 
           <Route path="*">

@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
+import { Box } from '@chakra-ui/react'
 
 import Navbar from './Navbar'
 
 const Layout = (props) => {
     return (
-      <Fragment>
+      <Box margin="30px">
         <Navbar />
         <main>{props.children}</main>
-      </Fragment>
+      </Box>
     );
   };
   
