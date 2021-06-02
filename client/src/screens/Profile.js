@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { DummyData } from '../resources/dummy.js'
 
 const Profile = () => {
     return(

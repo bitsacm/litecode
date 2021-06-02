@@ -13,7 +13,7 @@ import {
 const Navbar = () => {
     // const authCtx = useContext(AuthContext);
     // const isLoggedIn = authCtx.isLoggedIn;
-    const isLoggedIn = false;
+    const isLoggedIn = true;
     const hasRoom = false;
  
     return(

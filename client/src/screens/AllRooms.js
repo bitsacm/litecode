@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
+import { DummyData } from '../resources/dummy.js'
 
 const AllRooms = () => {
     return(
         <div>
-            AllRooms
+            {DummyData.name}
         </div>
     )
 }

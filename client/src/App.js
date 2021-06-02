@@ -13,8 +13,8 @@ import Profile from './screens/Profile';
 function App() {
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
-  const isLoggedIn = false;
-  const hasRoom = false;
+  const isLoggedIn = true;
+  const hasRoom = true;
 
   return (
     <div>
@@ -32,7 +32,7 @@ function App() {
             <Signup />
           </Route>
 
-          <Route path="/signup">
+          <Route path="/profile">
             <Profile />
           </Route>
 

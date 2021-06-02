@@ -19,7 +19,7 @@ const Login = () => {
 
     return(
         <Fragment>
-            <Flex paddingTop="150px" flexDirection="column" width="40%">
+            <Flex paddingTop="150px" flexDirection="column" width={["80%", "50%"]}>
                 <Heading>Login to your Litecode account.</Heading>
                 <FormControl id="email">
                     <FormLabel>Email address</FormLabel>
