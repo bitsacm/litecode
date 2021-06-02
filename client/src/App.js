@@ -14,7 +14,7 @@ function App() {
   // const authCtx = useContext(AuthContext);
   // const isLoggedIn = authCtx.isLoggedIn;
   const isLoggedIn = true;
-  const hasRoom = true;
+  const hasRoom = false;
 
   return (
     <div>
