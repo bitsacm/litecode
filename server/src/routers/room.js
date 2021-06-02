@@ -29,7 +29,7 @@ router.get('/rooms', auth, async (req, res) => {
         const rooms = await Room.find({ roomFull: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
     } catch (err) {
-        res.status(400).send(err)
+        res.status(400).json({error: `${err}`})
     }
 })
 
@@ -80,7 +80,7 @@ router.post('/joinRoom/:id', auth, async (req, res) => {
         const user = req.user
         res.status(200).json({ user, room })
     } catch (err) {
-        res.status(400).send(err)
+        res.status(400).json({error: `${err}`})
     }
 })
 
@@ -117,8 +117,7 @@ router.post('/leaveRoom', auth, async (req, res) => {
 
         res.status(200).json({ msg: 'Room left' })
     } catch (err) {
-        console.log(err)
-        res.status(400).send(err)
+        res.status(400).json({error: `${err}`})
     }
 })
 

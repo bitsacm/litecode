@@ -14,7 +14,7 @@ router.post('/users', async (req, res) => {
         const token = await user.generateAuthToken()
         res.status(201).json({ user, token })
     } catch (err) {
-        res.status(400).send(err)
+        res.status(400).json({ error: `${err}` })
     }
 })
 
@@ -26,7 +26,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         res.json({ user, token })
     } catch (err) {
-        res.status(400).send(err)
+        res.status(400).json({ error: `${err}` })
     }
 })
 
@@ -38,7 +38,7 @@ router.post('/users/logout', auth, async (req, res) => {
         await req.user.save()
         res.send()
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).json({ error: `${err}` })
     }
 })
 
@@ -49,6 +49,31 @@ router.get('/users/me', auth, async (req, res) => {
     res.json({ user })
 })
 
+// @desc    Update Current User Profile
+// @access  Private
+router.patch('/users/me', auth, async (req, res) => {
+    const updates = Object.keys(req.body) //Converts object to an array of strings!
+    const allowedUpdates = ['name', 'phoneNo', 'password', 'bio', 'yearOfStudy']
+    const isValidOperation = updates.every((update) => { //Checks if all the elements of an array satisfy a condition. Even if one fails, false is returned!
+        if (allowedUpdates.includes(update)) return true
+    })
+
+    if (isValidOperation) {
+        try {
+            updates.forEach((update) => {
+                req.user[update] = req.body[update]
+            })
+            await req.user.save()
+            res.json(req.user)
+        } catch (err) {
+            res.status(400).json({ error: `${err}` })
+        }
+    }
+    else {
+        res.status(403).json({ error: 'invalid update' })
+    }
+})
+
 // @desc    Upload avatar
 // @access  Private
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
@@ -56,7 +81,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
     await req.user.save()
     res.send()
 }, (err, req, res, next) => {
-    res.status(400).send({ error: err.message })
+    res.status(400).json({ error: err.message })
 })
 
 // @desc    GET current avatar
@@ -69,8 +94,7 @@ router.get('/users/me/avatar', auth, async (req, res) => {
         res.set('Content-Type', 'image/png')
         res.send(req.user.avatar)
     } catch (err) {
-        console.log(err)
-        res.status(400).send()
+        res.status(400).json({ error: `${err}` })
     }
 })
 
@@ -90,7 +114,7 @@ router.delete('/users/me', auth, async (req, res) => {
         res.json({ msg: 'User deleted successfully' })
     } catch (err) {
         console.log(err)
-        res.status(400).send(err)
+        res.status(400).json({ error: `${err}` })
     }
 })
 
