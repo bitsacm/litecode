@@ -12,17 +12,20 @@ const UserCard = (props) => {
         <Fragment>
             <Flex 
                 flexDirection="row" 
-                padding="20px" 
-                margin="10px"
-                bg="lite" 
-                width="400px"
+                padding="15px" 
+                margin="30px"
+                mt="30px"
+                mb="20px"
+                mr="50px"
+                ml="0"
+                bg="litegrey.20" 
+                pr="100px"
                 borderRadius="10px"
             >
-                <Image src={props.pp} boxSize="100px" borderRadius="100%" marginRight="20px"/>
+                <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
-                    <Heading fontSize="32px">{props.name}</Heading>
-                    <Text fontSize="24px">{props.description}</Text>
-                    <Text fontSize="22px">{props.phone}</Text>
+                    <Heading fontSize="24px" color="litegrey.600">{props.name}</Heading>
+                    <Text fontSize="20px" color="litegrey.400" fontWeight="medium">{props.phone}</Text>
                 </Flex>
             </Flex>
         </Fragment>
