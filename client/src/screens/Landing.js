@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { 
     HStack, 
     Heading,
@@ -13,6 +13,7 @@ import {
 import {
     Link
 } from 'react-router-dom'
+import AuthContext from '../store/auth'
 
 import landingImg from '../resources/img/landing.png'
 import landingImg1 from '../resources/img/landingImg1.jpg'
@@ -22,6 +23,14 @@ import landingImg4 from '../resources/img/landingImg4.jpg'
 import landingImg5 from '../resources/img/landingImg5.png'
 
 const Landing = () => {
+
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const login = () => {
+        authCtx.login("dummy")
+    }
+
     return(
         <Flex 
             flexDirection="row" 
@@ -63,9 +72,19 @@ const Landing = () => {
                     <Text mr="20px" ml="20px">+</Text>
                     <Image boxSize="50px" borderRadius="100%" objectFit="cover" border="2px" borderColor="litegold" src={landingImg5} />
                 </Flex>
-                <Button bg="liteblue" mt="20px" fontSize="24px" color="white" width="250px" height="50px" borderRadius="12px">Create an account ;)</Button>
-            
+                
+                <Button 
+                    bg="liteblue" 
+                    mt="20px" 
+                    fontSize="24px" 
+                    color="white" 
+                    width="250px" 
+                    height="50px" 
+                    borderRadius="12px"
+                    onClick={login}
+                >Create an account ;)</Button>
             </Flex>
+
             <Flex width="50%" justifyContent="center" alignItems="center">
                 <Image boxSize="450px" src={landingImg} />
             </Flex>
