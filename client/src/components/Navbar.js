@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { 
     HStack, 
     Heading,
@@ -13,6 +13,8 @@ import {
 
 import AuthContext from '../store/auth'
 import imgurl from '../resources/img/keyboard.png'
+import acmlogo from '../resources/img/acmlogo.png'
+import logoutpng from '../resources/img/logout.png'
 
 const Navbar = () => {
     const authCtx = useContext(AuthContext);
@@ -46,38 +48,39 @@ const Navbar = () => {
 
             {isLoggedIn ? 
             <Fragment>
-                <Link to="/room">
+                <NavLink activeClassName="activeLink" to="/room">
                     <Text
-                        fontSize="24px"
-                        color="liteg"
+                        fontSize="22px"
+                        color="litegrey.400"
+                        fontWeight="medium"
                         marginRight="25px"
-                    >my room</Text>
-                </Link>
+                    >My Room</Text>
+                </NavLink>
 
-                <Link to="/allrooms">
+                <NavLink activeClassName="activeLink" to="/allrooms">
                     <Text
-                        fontSize="24px"
-                        color="liteg"
+                        fontSize="22px"
+                        color="litegrey.400"
+                        fontWeight="medium"
                         marginRight="25px"
-                    >all rooms</Text>
-                </Link>
+                    >All Rooms</Text>
+                </NavLink>
 
-                <Link to="/profile">
-                    <Text
-                        fontSize="24px"
-                        color="liteg"
-                        marginRight="25px"
-                    >profile</Text>
-                </Link>
-
-                <Button
-                    bg="lite"
-                    borderRadius="20px"
-                    fontSize="24px"
+                <Image 
+                    height="40px"
+                    width="40px"
+                    objectFit="cover"
+                    src={logoutpng}
+                    padding="6px"
+                    opacity="0.2"
                     onClick={logout}
-                >logout</Button> 
+                />
             </Fragment> :
-            null}
+            <Image 
+                height="40px"
+                objectFit="cover"
+                src={acmlogo}
+            />}
         </Flex>
     )
 }
