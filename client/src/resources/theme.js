@@ -5,17 +5,13 @@ const theme = {
       transparent: "transparent",
       black: "#030303",
       white: "#fff",
-      lite: "#D1E4FF",
-      liteg: "#333333",
-      grey: {
-        700: "#2D3748",
-        500: "#535353",
-        300: "#ACACAC",
-        200: "DEDEDE",
-        100: "#EEEEEE",
-        20: "#EDF2F7"
+      liteblue: "#059FC9",
+      litegrey: {
+        600: "#718096",
+        400: "#A0AEC0",
+        20: "#F7FAFC",
       },
-      
+      litegold: "#ED8936"
     },
     fonts: {
         primary: "Roboto, sans-serif",

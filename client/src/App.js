@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout'
@@ -9,12 +9,12 @@ import Signup from './screens/Signup';
 import Room from './screens/Room';
 import Profile from './screens/Profile';
 
+import AuthContext from './store/auth';
 
 function App() {
-  // const authCtx = useContext(AuthContext);
-  // const isLoggedIn = authCtx.isLoggedIn;
-  const isLoggedIn = true;
-  const hasRoom = false;
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+  const hasRoom=true;
 
   return (
     <div>
@@ -25,15 +25,15 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <Login />
+            {isLoggedIn ? <Redirect to="/allrooms" /> : <Login />}
           </Route>
 
           <Route path="/signup">
-            <Signup />
+            {isLoggedIn ? <Redirect to="/allrooms" /> : <Signup />}
           </Route>
 
           <Route path="/profile">
-            <Profile />
+            {isLoggedIn ? <Profile /> : <Redirect to="/" />}
           </Route>
 
           <Route path="/room">
@@ -45,11 +45,7 @@ function App() {
           </Route>
 
           <Route path="/allrooms">
-            {isLoggedIn ? 
-            <Fragment>
-              {hasRoom ? <Redirect to="/room" /> : <AllRooms />}
-            </Fragment> :
-            <Redirect to="/" />}
+            {isLoggedIn ? <AllRooms /> : <Redirect to="/" />}
           </Route>
 
           <Route path="*">

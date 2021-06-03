@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { 
     FormControl, 
@@ -13,7 +13,20 @@ import {
     Heading,
 } from '@chakra-ui/react'
 
+import AuthContext from '../store/auth'
+
 const Login = () => {
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const logout = () => {
+        authCtx.logout()
+    }
+
+    const login = () => {
+        authCtx.login("dummy")
+    }
+
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
 
@@ -24,13 +37,13 @@ const Login = () => {
                 <FormControl id="email">
                     <FormLabel>Email address</FormLabel>
                     <Input type="email" />
-                    <FormHelperText>We'll never share your email.</FormHelperText>
+                    <FormHelperText>Create an account using your BITS email ID.</FormHelperText>
                 </FormControl>
 
                 <InputGroup size="md">
                     <Input
                     pr="4.5rem"
-                    type={show ? "text" : "password"}
+                    type={show ? "text=" : "password"}
                     placeholder="Enter password"
                     />
                     <InputRightElement width="4.5rem">
@@ -39,7 +52,7 @@ const Login = () => {
                     </Button>
                     </InputRightElement>
                 </InputGroup>
-                <Button>Login</Button>
+                <Button onClick={login}>Login</Button>
                 <Link to="/signup">
                     <Text>Don't have an account? Click here to signup.</Text>
                 </Link>

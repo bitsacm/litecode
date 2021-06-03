@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 
 const Layout = (props) => {
     return (
-      <Box margin="30px">
+      <Box mt="30px" mb="30px" mr="80px" ml="80px">
         <Navbar />
         <main>{props.children}</main>
       </Box>

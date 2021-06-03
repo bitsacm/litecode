@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { 
     HStack, 
@@ -6,15 +6,25 @@ import {
     Text,
     Spacer,
     Button,
+    Image,
     Box,
     Flex
 } from '@chakra-ui/react'
 
+import AuthContext from '../store/auth'
+import imgurl from '../resources/img/keyboard.png'
+
 const Navbar = () => {
-    // const authCtx = useContext(AuthContext);
-    // const isLoggedIn = authCtx.isLoggedIn;
-    const isLoggedIn = true;
-    const hasRoom = false;
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const logout = () => {
+        authCtx.logout()
+    }
+
+    const login = () => {
+        authCtx.login("dummy")
+    }
  
     return(
         <Flex 
@@ -27,19 +37,8 @@ const Navbar = () => {
                     flexDirection="row" 
                     alignItems="center"
                     justifyContent="center">
-                    <Box 
-                        height="50px" 
-                        width="50px" 
-                        bg="lite"
-                        fontSize="36px"
-                        color="liteg"
-                        borderRadius="8px"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        marginRight="15px"
-                    >lc</Box>
-                    <Heading color="liteg">litecode</Heading>
+                    <Image boxSize="50px" src={imgurl} mr="8px"/>
+                    <Heading fontSize="32px" color="liteblue">litecode</Heading>
                 </Flex>
             </Link>
 
@@ -75,6 +74,7 @@ const Navbar = () => {
                     bg="lite"
                     borderRadius="20px"
                     fontSize="24px"
+                    onClick={logout}
                 >logout</Button> 
             </Fragment> :
             null}

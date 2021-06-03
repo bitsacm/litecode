@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { 
     FormControl, 
@@ -13,9 +13,22 @@ import {
     Heading,
 } from '@chakra-ui/react'
 
+import AuthContext from '../store/auth'
+
 const Signup = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const logout = () => {
+        authCtx.logout()
+    }
+
+    const signup = () => {
+        authCtx.login("dummy")
+    }
 
     return(
         <Fragment>
@@ -39,7 +52,7 @@ const Signup = () => {
                     </Button>
                     </InputRightElement>
                 </InputGroup>
-                <Button>Signup</Button>
+                <Button onClick={signup}>Signup</Button>
                 <Link to="/login">
                     <Text>Already have an account? Click here to login!</Text>
                 </Link>

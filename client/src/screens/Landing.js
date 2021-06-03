@@ -5,52 +5,70 @@ import {
     Text,
     Spacer,
     Button,
+    Image,
     Box,
     Flex
 } from '@chakra-ui/react'
+
 import {
     Link
 } from 'react-router-dom'
 
+import landingImg from '../resources/img/landing.png'
+import landingImg1 from '../resources/img/landingImg1.jpg'
+import landingImg2 from '../resources/img/landingImg2.jpg'
+import landingImg3 from '../resources/img/landingImg3.jpg'
+import landingImg4 from '../resources/img/landingImg4.jpg'
+import landingImg5 from '../resources/img/landingImg5.png'
+
 const Landing = () => {
     return(
-        <Flex position="fixed">
-            <Flex width="65%" paddingLeft="20px" height="580px" flexDirection="column" alignContent="center" justifyContent="center">
+        <Flex 
+            flexDirection="row" 
+            width="100%" 
+            mt="30px" 
+            justifyContent="space-between"
+            alignItems="center"
+        >
+            <Flex 
+                flexDirection="column" 
+                width="50%" 
+                height="500px"
+                justifyContent="center"
+            >
+                
                 <Heading
-                    fontSize="48px"
-                    color="liteg"
-                    lineHeight="1"
-                    paddingBottom="15px"
-                >Share Leetcode premium accounts.</Heading>
+                    fontSize="44px"
+                    color="litegrey.600"
+                >Share Leetcode</Heading>
+
+                <Heading
+                    mt="-5px"
+                    fontSize="44px"
+                    color="litegrey.600"
+                >premium accounts.</Heading>
+
                 <Text
-                    fontSize="26px"
-                    color="#535353"
+                    mt="10px"
+                    color="litegrey.400"
+                    fontSize="24px"
                     fontWeight="medium"
-                    lineHeight="1.2"
-                    paddingBottom="35px"
-                >Create an account. We match you with a room of similar individuals.</Text>
-                <Link to="/login">
-                    <Button
-                    width="200px"
-                    height="50px"
-                    fontSize="28px"
-                    color="liteg"
-                    bg="lite"
-                    borderRadius="50px"
-                >Get Started</Button>
-                </Link>
+                >Discover people willing to split the cost for LeetCode Premium accounts with you.</Text>
+                
+                <Flex flexDirection="row" mt="30px" mb="20px" alignItems="center">
+                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="0px" border="2px" borderColor="liteblue" src={landingImg1} />
+                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg2} />
+                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg3} />
+                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg4} />
+                    <Text mr="20px" ml="20px">+</Text>
+                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" border="2px" borderColor="litegold" src={landingImg5} />
+                </Flex>
+                <Button bg="liteblue" mt="20px" fontSize="24px" color="white" width="250px" height="50px" borderRadius="12px">Create an account ;)</Button>
+            
             </Flex>
-            <Box 
-                width="1200px" 
-                height="1200px" 
-                borderRadius="150%" 
-                bg="lite" 
-                position="absolute" 
-                overflowX="hidden"
-                zIndex="-2"
-                marginLeft="100%"
-                marginTop="-40%"
-            ></Box>
+            <Flex width="50%" justifyContent="center" alignItems="center">
+                <Image boxSize="450px" src={landingImg} />
+            </Flex>
         </Flex>
     )
 }
