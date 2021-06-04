@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
     },
     phoneNo: {
         type: String,
-        required: true,
         validate(value) {
             if (!validator.isMobilePhone(value, ['en-IN'])) {
                 throw new Error('Invalid Mobile')
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema({
         }
     },
     avatar: {
-        type: Buffer
+        type: String
     },
     inRoom: {
         type: Boolean,

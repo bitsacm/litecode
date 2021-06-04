@@ -3,34 +3,9 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const User = require('../models/user')
 
-// @desc    Register User
-// @access  Public
-router.post('/users', async (req, res) => {
-    //oauth
-    try {
-        await user.save()
-        const token = await user.generateAuthToken()
-        res.status(201).json({ user, token })
-    } catch (err) {
-        res.status(400).json({ error: `${err}` })
-    }
-})
-
-// @desc    Login User
-// @access  Public
-router.post('/users/login', async (req, res) => {
-    try {
-        // ADD Oauth
-        const token = await user.generateAuthToken()
-        res.json({ user, token })
-    } catch (err) {
-        res.status(400).json({ error: `${err}` })
-    }
-})
-
 // @desc    Logout User
 // @access  Private
-router.post('/users/logout', auth, async (req, res) => {
+router.post('/auth/logout', auth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()

@@ -6,18 +6,30 @@ const auth = require('../middleware/auth')
 
 // @desc    Create New Room
 // @access  Public
+// query params -> /createRoom?roomName=randomGroup123
+// if no query, random 6 character hex string
 router.post('/createRoom', async (req, res) => {
+    const query = req.query.roomName
     const room = new Room({
         users: []
     })
-    while (1) {
-        var id = crypto.randomBytes(3).toString('hex');
-        var roomExists = await Room.findOne({ roomID: id })
-        if (!roomExists) {
-            break
+    if (query) {
+        const roomDuplicate = await Room.findOne({ roomID: query })
+        if (roomDuplicate) {
+            return res.status(400).json({ error: 'room with that name already exists' })
         }
+        room.roomID = query
+        
+    } else {
+        while (1) {
+            var id = crypto.randomBytes(3).toString('hex')
+            var roomExists = await Room.findOne({ roomID: id })
+            if (!roomExists) {
+                break
+            }
+        }
+        room.roomID = id
     }
-    room.roomID = id
     await room.save()
     res.status(201).json(room)
 })
@@ -29,7 +41,7 @@ router.get('/rooms', auth, async (req, res) => {
         const rooms = await Room.find({ roomFull: false, roomLocked: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
     } catch (err) {
-        res.status(400).json({error: `${err}`})
+        res.status(400).json({ error: `${err}` })
     }
 })
 
@@ -63,7 +75,7 @@ router.post('/joinRoom/:id', auth, async (req, res) => {
         if (room.roomFull) {
             return res.status(400).json({ error: 'Room full' })
         }
-        else if (room.roomLocked){
+        else if (room.roomLocked) {
             return res.status(400).json({ error: 'Room Locked' })
         }
 
@@ -83,7 +95,7 @@ router.post('/joinRoom/:id', auth, async (req, res) => {
         const user = req.user
         res.status(200).json({ user, room })
     } catch (err) {
-        res.status(400).json({error: `${err}`})
+        res.status(400).json({ error: `${err}` })
     }
 })
 
@@ -120,7 +132,7 @@ router.post('/leaveRoom', auth, async (req, res) => {
 
         res.status(200).json({ msg: 'Room left' })
     } catch (err) {
-        res.status(400).json({error: `${err}`})
+        res.status(400).json({ error: `${err}` })
     }
 })
 
