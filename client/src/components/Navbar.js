@@ -39,36 +39,44 @@ const Navbar = () => {
                     flexDirection="row" 
                     alignItems="center"
                     justifyContent="center">
-                    <Image boxSize="50px" src={imgurl} mr="8px"/>
-                    <Heading fontSize="32px" color="liteblue">litecode</Heading>
+                    <Image 
+                    boxSize={["25px", "35px", "50px", "50px", "50px"]}
+                    src={imgurl} 
+                    mr={["2px", "8px", "8px", "8px", "8px"]}
+                    />
+                    <Heading 
+                    fontSize={["20px", "24px", "32px", "32px", "32px"]}
+                    mr={["20px", "24px", "32px", "32px", "32px"]}
+                    color="liteblue">litecode</Heading>
                 </Flex>
             </Link>
 
             <Spacer />
 
+            
+
             {isLoggedIn ? 
             <Fragment>
                 <NavLink activeClassName="activeLink" to="/room">
                     <Text
-                        fontSize="22px"
+                        fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
                         fontWeight="medium"
-                        marginRight="25px"
+                        marginRight={["10px", "10px", "25px", "25px", "25px"]}
                     >My Room</Text>
                 </NavLink>
 
                 <NavLink activeClassName="activeLink" to="/allrooms">
                     <Text
-                        fontSize="22px"
+                        fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
                         fontWeight="medium"
-                        marginRight="25px"
+                        marginRight={["2px", "10px", "25px", "25px", "25px"]}
                     >All Rooms</Text>
                 </NavLink>
 
                 <Image 
-                    height="40px"
-                    width="40px"
+                    boxSize={["35px", "35px", "40px", "40px", "40px"]}
                     objectFit="cover"
                     src={logoutpng}
                     padding="6px"
@@ -77,7 +85,7 @@ const Navbar = () => {
                 />
             </Fragment> :
             <Image 
-                height="40px"
+                height={["30px", "30px", "40px", "40px", "40px"]}
                 objectFit="cover"
                 src={acmlogo}
             />}

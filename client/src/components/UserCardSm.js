@@ -20,11 +20,12 @@ const UserCardSm = (props) => {
                 bg="litegrey.20" 
                 width="250px"
                 borderRadius="10px"
+                alignItems="center"
             >
-                <Image src={props.member.imgUrl} boxSize="18px" borderRadius="100%" marginRight="20px"/>
+                <Image src={props.member.imgUrl} boxSize="30px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
                     <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
-                        <Heading fontSize="20px" color="litegrey.600">{props.member.name}</Heading>
+                        <Heading fontSize="18px" color="litegrey.600">{props.member.name}</Heading>
                         {props.member.isAdmin ?
                          <Text
                             ml="10px"

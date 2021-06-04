@@ -33,7 +33,7 @@ const RoomCard = (props) => {
                 padding="30px" 
                 margin="10px"
                 bg="litegrey.20" 
-                width="400px"
+                width={["300px", "350px", "400px", "400px", "400px"]}
                 borderRadius="10px"
 
             >
@@ -70,7 +70,7 @@ const RoomCard = (props) => {
                     onClick={onOpen}
                 >Join</Button>
 
-                <Modal m="10px" isOpen={isOpen} size="xl" onClose={onClose}>
+                <Modal margin="100px" isOpen={isOpen} size="xl" onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader
@@ -86,13 +86,17 @@ const RoomCard = (props) => {
                                 fontWeight="medium"
                                 color="litegrey.400"
                             >There’s 4 members here</Text>
-                            <Flex flexDirection="row" mt=" 20px" justifyContent="space-between">
+                            <Flex 
+                            flexDirection={["column", "column", "row", "row", "row"]}
+                            mt="20px" 
+                            justifyContent="space-between"
+                            >
                                 <Flex flexDirection="column" width="60%">
                                     {(props.room.members.map((member, id) => (
                                         <UserCardSm member={member} />
                                     )))}
                                 </Flex>
-                                <Flex flexDirection="column" width="40%">
+                                <Flex flexDirection="column" width="40%" mt="30px">
                                 <Text
                                 fontSize="25px"
                                 color="litegrey.400"
@@ -103,7 +107,7 @@ const RoomCard = (props) => {
                                 color="litegrey.600"
                                 mb="30px"
                                 >₹ {props.room.price}</Heading>
-                                <Button bg="liteblue" width="150px" borderRadius="10" color="white" onClick={onClose}>
+                                <Button bg="liteblue" width="150px" borderRadius="10" mb="20px" color="white" onClick={onClose}>
                                     Join Group
                                     </Button>
                                 </Flex>

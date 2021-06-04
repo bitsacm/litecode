@@ -15,10 +15,10 @@ const Room = () => {
                 color="litegrey.600"
             >👏 It's a party!</Heading>
 
-        <Flex flexDir="row">
+        <Flex flexDir={["column", "column", "row", "row", "row"]}>
 
             <Box display="flex" width="70%">
-                <Flex margin="auto"flexDirection="row" flexWrap="wrap" marginTop="10px">
+                <Flex margin="auto"flexDirection="row" mt="30px" flexWrap="wrap">
                     {room.members.map((member, index)=>(
                         <UserCard 
                             name={member.name}
@@ -30,7 +30,9 @@ const Room = () => {
                     ))}
                 </Flex>
             </Box>
-            <Box display="flex" flexDir="column" mt="40px" width="30%">
+            <Box display="flex" flexDir="column" mt="40px" 
+            width={["70%", "70%", "30%", "30%", "30%"]}
+            >
                 <Heading
                     fontSize="20px"
                     color="litegrey.400"

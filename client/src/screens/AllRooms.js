@@ -15,16 +15,18 @@ import RoomCard from '../components/RoomCard.js'
 
 const AllRooms = () => {
     const allRooms = DummyData.allRooms;
-    
+
     return(
-        <div>
-            <InputGroup 
-                width="40%" 
-                margin="auto"
-                height="0px"                    
+        
+        <Flex width="100%"  flexDirection="column" justifyContent="center" alignItems="center">
+            <Box margin="auto" display="flex"justifyContent="center" alignItems="center"  width="100%"><InputGroup 
+                width={["350px", "80%", "40%", "40%", "40%"]}
+                height="0px"                
+                m="20px"    
                 mt="50px"
                 mb="70px"
                 border="none"
+             
             >
 
                 <InputLeftElement
@@ -44,16 +46,17 @@ const AllRooms = () => {
                     placeholder="Looking for a friend's group?" 
                 />
 
-            </InputGroup>
+            </InputGroup></Box>
             
             <Box display="flex" width="100%" margin="auto">
-                <Flex margin="auto"flexDirection="row" flexWrap="wrap" marginTop="10px">
+                <Flex margin="auto" flexDirection="row" justifyContent="center" alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
                         <RoomCard room={room} />
                     ))}
                 </Flex>
             </Box>
-        </div>
+        </Flex>
+        
     )
 }
 

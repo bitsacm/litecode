@@ -33,7 +33,7 @@ const Landing = () => {
 
     return(
         <Flex 
-            flexDirection="row" 
+            flexDirection={["column", "column", "row", "row", "row"]}
             width="100%" 
             mt="30px" 
             justifyContent="space-between"
@@ -41,7 +41,7 @@ const Landing = () => {
         >
             <Flex 
                 flexDirection="column" 
-                width="50%" 
+                width={["100%", "100%", "50%", "50%", "50%"]} 
                 height="500px"
                 justifyContent="center"
             >
@@ -85,8 +85,16 @@ const Landing = () => {
                 >Create an account ;)</Button>
             </Flex>
 
-            <Flex width="50%" justifyContent="center" alignItems="center">
-                <Image boxSize="450px" src={landingImg} />
+            <Flex 
+            pt={["50px", "50px", "0px", "0px", "0px"]} 
+            width={["100%", "100%", "50%", "50%", "50%"]} 
+            justifyContent="center" 
+            alignItems="center">
+                <Image 
+                ml="25px"
+                mr="25px"
+                boxSize={["350px", "350px", "450px", "450px", "450px"]}
+                objectFit="cover" src={landingImg} />
             </Flex>
         </Flex>
     )
