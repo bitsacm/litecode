@@ -7,191 +7,171 @@ export const DummyData = {
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         },
         {
             id: 2,
-            name: "randomgroup",
+            name: "randomgroup2",
             price: 2500,
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         },
         {
             id: 3,
-            name: "randomgroup",
+            name: "randomgroup3",
             price: 2500,
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         },
         {
             id: 4,
-            name: "randomgroup",
+            name: "randomrand",
             price: 2500,
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         },
         {
             id: 5,
-            name: "randomgroup",
+            name: "nameren",
             price: 2500,
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         },
@@ -202,35 +182,31 @@ export const DummyData = {
             members: [
                 {
                     id: 1,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: true,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 2,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 3,
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
                 {
                     id: 4,
+                    isAdmin: false,
+                    phone: "+91 9910231328",
                     name: "Parth Sharma",
-                    pp: "https://avatars.githubusercontent.com/u/45586386?v=4",
-                    description: "3rd year, BITS Pilani",
-                    email: "parthsharma151@gmail.com",
-                    phone: "+91 9910231328"
+                    imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
                 },
             ]
         }

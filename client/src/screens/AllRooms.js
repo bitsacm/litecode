@@ -14,7 +14,8 @@ import {SearchIcon} from '@chakra-ui/icons'
 import RoomCard from '../components/RoomCard.js'
 
 const AllRooms = () => {
-    const allRooms = DummyData.allRooms
+    const allRooms = DummyData.allRooms;
+    
     return(
         <div>
             <InputGroup 
@@ -25,7 +26,7 @@ const AllRooms = () => {
                 mb="70px"
                 border="none"
             >
-                
+
                 <InputLeftElement
                     ml="5px"
                     pointerEvents="none"
