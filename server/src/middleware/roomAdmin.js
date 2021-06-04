@@ -4,7 +4,7 @@ const Room = require('../models/room')
 const admin = async (req, res, next) => {
     try {
         const roomID = req.user.roomID
-        const room = await Room.find({roomID})
+        const room = await Room.findOne({roomID})
         if(room.roomAdmin.equals(req.user._id)){
             next()
         }
