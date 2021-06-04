@@ -1,4 +1,5 @@
 const axios = require('axios')
+require("dotenv").config();
 
 // import googleapis to simplify oauth implementation by using google's library function
 const { google } = require('googleapis')

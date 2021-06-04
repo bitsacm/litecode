@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const Room = require('../models/room')
+require("dotenv").config();
 
 const userSchema = new mongoose.Schema({
     name: {

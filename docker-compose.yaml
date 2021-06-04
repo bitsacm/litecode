@@ -1,0 +1,56 @@
+
+version: "3"
+
+services:
+  server:
+    container_name: "litecode_server"
+    restart: unless-stopped
+    build: ./server
+    env_file: ./server/config.env
+    depends_on: 
+      - db
+    ports: 
+      - 3004:3000
+    expose: 
+      - 3000
+    volumes: 
+      - ./server:/home/node/app    
+  
+  client:
+    container_name: 'litecode_client'
+    build: ./client
+    env_file: ./client/config.env
+    ports: 
+        - 3000:3000
+    expose: 
+        - 3000  
+    volumes: 
+        react_build:/app/build          
+      
+  db:
+    container_name: 'litecode_mongodb'
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: litecode
+      MONGO_INITDB_ROOT_PASSWORD: litecode123
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db    
+
+  nginx:
+    container_name: "litecode_nginx"
+    image: nginx:mainline-alpine
+    restart: unless-stopped
+    ports:
+      - "1337:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - react_build:/var/www/html/
+    depends_on:
+      - server
+
+volumes:
+  mongodb_data_container:
+  react_build:
+  
