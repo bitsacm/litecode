@@ -4,6 +4,7 @@ import { Flex, Box, Heading, Text, Button } from '@chakra-ui/react'
 import { DummyData } from '../resources/dummy.js'
 
 const Room = () => {
+    const userIsAdmin=true;
     const room = DummyData.room
     return(
         <Fragment>
@@ -22,8 +23,9 @@ const Room = () => {
                         <UserCard 
                             name={member.name}
                             imgUrl={member.imgUrl}
-                            description={member.description}
                             phone={member.phone}
+                            isAdmin={member.isAdmin}
+                            userIsAdmin={userIsAdmin}
                         />
                     ))}
                 </Flex>
@@ -57,7 +59,9 @@ const Room = () => {
                 fontSize="28px"
                 color="litegrey.600">₹ {room.price}</Text>
 
-                <Button bg="red" width="150px" mt="40px" color="white">Leave Group</Button>
+                {userIsAdmin ? 
+                    <Button bg="liteblue" width="150px" mt="40px" color="white">Lock Group</Button> : 
+                    <Button bg="red" width="150px" mt="40px" color="white">Leave Group</Button>}
             </Box>
             </Flex>
         </Fragment>

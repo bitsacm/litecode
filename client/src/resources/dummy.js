@@ -103,21 +103,21 @@ export const DummyData = {
             },
             {
                 id: 2,
-                isAdmin: true,
+                isAdmin: false,
                 phone: "+91 9910231328",
                 name: "Parth Sharma",
                 imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
             },
             {
                 id: 3,
-                isAdmin: true,
+                isAdmin: false,
                 phone: "+91 9910231328",
                 name: "Parth Sharma",
                 imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
             },
             {
                 id: 4,
-                isAdmin: true,
+                isAdmin: false,
                 phone: "+91 9910231328",
                 name: "Parth Sharma",
                 imgUrl: "https://avatars.githubusercontent.com/u/45586386?v=4"
