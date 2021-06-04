@@ -22,11 +22,11 @@ router.post('/createRoom', async (req, res) => {
     res.status(201).json(room)
 })
 
-// @desc    GET all rooms which are not full
+// @desc    GET all rooms which are not full/locked
 // @access  Private
 router.get('/rooms', auth, async (req, res) => {
     try {
-        const rooms = await Room.find({ roomFull: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
+        const rooms = await Room.find({ roomFull: false, roomLocked: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
     } catch (err) {
         res.status(400).json({error: `${err}`})
@@ -62,6 +62,9 @@ router.post('/joinRoom/:id', auth, async (req, res) => {
         }
         if (room.roomFull) {
             return res.status(400).json({ error: 'Room full' })
+        }
+        else if (room.roomLocked){
+            return res.status(400).json({ error: 'Room Locked' })
         }
 
         req.user.inRoom = true

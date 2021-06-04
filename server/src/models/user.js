@@ -16,14 +16,6 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true,
         lowercase: true,
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Invalid Email')
-            }
-            // if (!value.endsWith(".bits-pilani.ac.in")) {
-            //     throw new Error('The email is not associated with BITS')
-            // }
-        }
     },
     phoneNo: {
         type: String,
@@ -33,26 +25,6 @@ const userSchema = new mongoose.Schema({
                 throw new Error('Invalid Mobile')
             }
         }
-    },
-    username: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-        minLength: 8
-    },
-    bio: {
-        type: String,
-        trim: true
-    },
-    yearOfStudy: {
-        type: String,
-        required: true
     },
     avatar: {
         type: Buffer
@@ -84,27 +56,11 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.methods.toJSON = function () {
     const userObject = this.toObject()
-    delete userObject.password
     delete userObject.tokens
     delete userObject.avatar
     delete userObject.__v
     return userObject
 }
-
-userSchema.statics.findByCredentials = async (username, password) => {
-    const user = await User.findOne({ username })
-    if (!user) throw new Error('Invalid Credentials')
-    const isMatch = await bcrypt.compare(password, user.password)
-    if (!isMatch) throw new Error('Invalid Credentials')
-    return user
-}
-
-userSchema.pre('save', async function (next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 8)
-    }
-    next()
-})
 
 userSchema.pre('remove', async function (next) {
     if (this.inRoom) {
