@@ -25,7 +25,9 @@ services:
     expose: 
         - 3000  
     volumes: 
-        react_build:/app/build          
+        - react_build:/app/build   
+    depends_on: 
+      - server           
       
   db:
     container_name: 'litecode_mongodb'
@@ -49,6 +51,7 @@ services:
       - react_build:/var/www/html/
     depends_on:
       - server
+      - client
 
 volumes:
   mongodb_data_container:
