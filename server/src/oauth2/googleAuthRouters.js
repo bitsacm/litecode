@@ -17,7 +17,6 @@ router.get('/auth/google/redirect', async (req, res) => {
 
   const user = await User.findOne({ email: data.email })
 
-  // if user does not exist, create a new one or login an existing user
   if (!user) {
     const user = new User({
       email: data.email,
