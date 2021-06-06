@@ -3,18 +3,6 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const User = require('../models/user')
 
-// @desc    Logout User
-// @access  Private
-router.post('/auth/logout', auth, async (req, res) => {
-    try {
-        req.user.tokens = []
-        await req.user.save()
-        res.send()
-    } catch (err) {
-        res.status(500).json({ error: `${err}` })
-    }
-})
-
 // @desc    GET Current User Profile
 // @access  Private
 router.get('/users/me', auth, async (req, res) => {
