@@ -25,6 +25,30 @@ import {
 
 const RoomCard = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const roomId = props.room.roomID;
+
+    const joinRoom = () => {
+        fetch('http://acm-litecode.herokuapp.com/joinRoom/'+roomId,
+                {   
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    console.log(res.data);
+                } else {
+                    alert("ERROR POSTING CONTENT.");
+                }
+            }))
+    }
 
     return(
         <Fragment>
@@ -40,12 +64,13 @@ const RoomCard = (props) => {
                 <Heading
                     fontSize="28px"
                     color="litegrey.600"
-                >{props.room.name}</Heading>
+                >{props.room.roomID}</Heading>
+                {props.room.users ? 
                 <Box margin="0px">
                     <Flex flexDirection="row">
-                        {props.room.members.map((member, index) => (
+                        {props.room.users.map((user, id) => (
                             <Image 
-                                src={member.imgUrl} 
+                                src={user.userID.imgUrl} 
                                 boxSize="20px" 
                                 mr="5px" 
                                 mt="5px"
@@ -56,12 +81,12 @@ const RoomCard = (props) => {
                             />
                         ))}
                     </Flex>
-                </Box>
+                </Box>:null}
                 <Text
                  fontSize="18px"
                  fontWeight="medium"
                  color="litegrey.400"
-                >You’ll need to pay ₹{props.room.price} if you join</Text>
+                >You’ll need to pay ₹{props.room.toPay} if you join</Text>
                 <Button
                     width="80px"
                     mt="20px"
@@ -77,23 +102,24 @@ const RoomCard = (props) => {
                             mt="10px"
                             fontSize="28px"
                             color="litegrey.600"
-                        >{props.room.name}</ModalHeader>
+                        >{props.room.roomID}</ModalHeader>
                         <ModalCloseButton />
+                        {props.room.users ?
                         <ModalBody>
                             <Text 
                                 mt="-25px"
                                 fontSize="20px"
                                 fontWeight="medium"
                                 color="litegrey.400"
-                            >There’s 4 members here</Text>
+                            >There’s {props.room.users.length} members here</Text>
                             <Flex 
                             flexDirection={["column", "column", "row", "row", "row"]}
                             mt="20px" 
                             justifyContent="space-between"
                             >
                                 <Flex flexDirection="column" width="60%">
-                                    {(props.room.members.map((member, id) => (
-                                        <UserCardSm member={member} />
+                                    {(props.room.users.map((user, id) => (
+                                        <UserCardSm user={user.userID} />
                                     )))}
                                 </Flex>
                                 <Flex flexDirection="column" width="40%" mt="30px">
@@ -106,13 +132,13 @@ const RoomCard = (props) => {
                                 fontSize="34px"
                                 color="litegrey.600"
                                 mb="30px"
-                                >₹ {props.room.price}</Heading>
-                                <Button bg="liteblue" width="150px" borderRadius="10" mb="20px" color="white" onClick={onClose}>
+                                >₹ {props.room.toPay}</Heading>
+                                <Button bg="liteblue" width="150px" borderRadius="10" mb="20px" color="white" onClick={joinRoom}>
                                     Join Group
                                     </Button>
                                 </Flex>
                             </Flex>
-                        </ModalBody>
+                        </ModalBody>:null}
                     </ModalContent>
                 </Modal>
             </Flex>

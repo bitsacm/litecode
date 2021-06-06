@@ -32,7 +32,7 @@ const Landing = () => {
     }
 
     return(
-        <Flex 
+        <Flex
             flexDirection={["column", "column", "row", "row", "row"]}
             width="100%" 
             mt="30px" 

@@ -10,7 +10,7 @@ import AuthContext from './store/auth';
 
 function App() {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const isLoggedIn = true;
   const hasRoom=true;
 
   return (

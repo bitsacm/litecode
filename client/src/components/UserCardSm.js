@@ -22,11 +22,11 @@ const UserCardSm = (props) => {
                 borderRadius="10px"
                 alignItems="center"
             >
-                <Image src={props.member.imgUrl} boxSize="30px" borderRadius="100%" marginRight="20px"/>
+                <Image src={props.user.imgUrl} boxSize="30px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
                     <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
-                        <Heading fontSize="18px" color="litegrey.600">{props.member.name}</Heading>
-                        {props.member.isAdmin ?
+                        <Heading fontSize="18px" color="litegrey.600">{props.user.name}</Heading>
+                        {props.user.isAdmin ?
                          <Text
                             ml="10px"
                             bg="litegrey.600"
@@ -39,7 +39,7 @@ const UserCardSm = (props) => {
                         : 
                         null}
                     </Flex>
-                    <Text fontSize="14px" color="litegrey.400" fontWeight="medium">{props.member.phone}</Text>
+                    <Text fontSize="14px" color="litegrey.400" fontWeight="medium">{props.user.phone}</Text>
                 </Flex>
             </Flex>
         </Fragment>
