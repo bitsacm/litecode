@@ -5,7 +5,7 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 
 router.get('/auth/google', async (req, res) => {
-  await res.redirect(googleLoginUrl)
+  res.json({googleLoginUrl})
 })
 
 router.get('/auth/google/redirect', async (req, res) => {
