@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useEffect} from 'react'
+import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 import UserCard from '../components/UserCard.js'
 import { Flex, Box, Heading, Text, Button, Spinner } from '@chakra-ui/react'
 import { DummyData } from '../resources/dummy.js'
@@ -6,6 +7,8 @@ import { DummyData } from '../resources/dummy.js'
 const Room = () => {
     const [userIsAdmin, setUserIsAdmin]=useState(null);
     const [roomDetails, updateRoomDetails] = useState(null)
+
+    const history = useHistory();
 
     useEffect(() => {
         loadRoom()
@@ -62,6 +65,54 @@ const Room = () => {
                 }
             }))
     }
+
+    const lockRoom = () => {
+        fetch('http://acm-litecode.herokuapp.com/lock',
+                {   
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    console.log(res.data)
+                } else {
+                    alert("ERROR POSTING CONTENT.");
+                }
+            }))
+    }
+
+    const leaveRoom = () => {
+        fetch('http://acm-litecode.herokuapp.com/leaveRoom',
+                {   
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    console.log(res.data)
+                } else {
+                    alert("ERROR POSTING CONTENT.");
+                }
+            }))
+    }
+
+
     return(
         <Fragment>
             {roomDetails ? 
@@ -120,8 +171,8 @@ const Room = () => {
                 color="litegrey.600">₹ {roomDetails.room.costPerMember}</Text>
 
                 {userIsAdmin ? 
-                    <Button bg="liteblue" width="150px" mt="40px" color="white">Lock Group</Button> : 
-                    <Button bg="red" width="150px" mt="40px" color="white">Leave Group</Button>}
+                    <Button bg="liteblue" width="150px" mt="40px" color="white" onClick={lockRoom}>Lock Group</Button> : 
+                    <Button bg="red" width="150px" mt="40px" color="white" onClick={leaveRoom}>Leave Group</Button>}
             </Box>
             </Flex>
             </Fragment>:<Spinner />}

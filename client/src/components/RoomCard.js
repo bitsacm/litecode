@@ -70,7 +70,7 @@ const RoomCard = (props) => {
                     <Flex flexDirection="row">
                         {props.room.users.map((user, id) => (
                             <Image 
-                                src={user.userID.imgUrl} 
+                                src={user.userID.avatar} 
                                 boxSize="20px" 
                                 mr="5px" 
                                 mt="5px"

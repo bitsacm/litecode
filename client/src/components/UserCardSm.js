@@ -22,7 +22,7 @@ const UserCardSm = (props) => {
                 borderRadius="10px"
                 alignItems="center"
             >
-                <Image src={props.user.imgUrl} boxSize="30px" borderRadius="100%" marginRight="20px"/>
+                <Image src={props.user.avatar} boxSize="30px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
                     <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
                         <Heading fontSize="18px" color="litegrey.600">{props.user.name}</Heading>
