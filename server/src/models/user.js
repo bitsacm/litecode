@@ -56,7 +56,6 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.methods.toJSON = function () {
     const userObject = this.toObject()
     delete userObject.tokens
-    delete userObject.avatar
     delete userObject.__v
     return userObject
 }
