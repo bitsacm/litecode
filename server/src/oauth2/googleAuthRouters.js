@@ -29,7 +29,8 @@ router.get('/auth/google/redirect', async (req, res) => {
       const token = await user.generateAuthToken()
 
       res.cookie('jwt', token)
-      res.redirect('http://localhost:3000')
+      res.redirect(req.query.state || '/')
+
     } catch (error) {
       res.status(400).send(error)
     }
@@ -38,7 +39,8 @@ router.get('/auth/google/redirect', async (req, res) => {
       await user.save()
       const token = await user.generateAuthToken()
       res.cookie('jwt', token)
-      res.redirect('http://localhost:3000')
+      res.redirect(req.query.state || '/')
+
     } catch (error) {
       res.status(400).send(error)
     }
