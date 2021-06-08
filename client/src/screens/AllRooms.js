@@ -187,7 +187,7 @@ const InitialFocus = (props) =>  {
             </ModalBody>
   
             <ModalFooter>
-              <Button onClick={submitHandler} colorScheme="blue" mr={3}>
+              <Button onClick={submitHandler} bg="liteblues" color="liteblue" mr={3}>
                 Create
               </Button>
             </ModalFooter>

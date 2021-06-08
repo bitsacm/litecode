@@ -144,10 +144,12 @@ const Room = () => {
                     {roomDetails.room.users.map((user, index)=>(
                         <UserCard 
                             name={user.userID.name}
+                            id={user.userID._id}
                             imgUrl={user.userID.avatar}
                             phone={user.userID.phoneNo}
+                            loadRoom={loadRoom}
                             isAdmin={user.userID._id===roomDetails.room.roomAdmin}
-                            userIsAdmin={user.userID._id===roomDetails.room.roomAdmin}
+                            userIsAdmin={(roomDetails.room.roomAdmin === userInfo.user._id)}
                         />
                     ))}
                 </Flex>

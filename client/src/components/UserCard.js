@@ -1,16 +1,42 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
+import AuthContext from '../store/auth.js'
 import {
     Heading,
     Text,
     Image,
     Flex,
-    
-
 } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 
 
 const UserCard = (props) => {
+
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
+
+    const deleteUser = () => {
+        fetch('http://localhost:3000/remove/'+props.id,
+                {   
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+token,
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    console.log(res.data)
+                    props.loadRoom();
+                } else {
+                    alert("ERROR POSTING CONTENT.");
+                }
+            }))
+    }
    
     return(
         <Fragment>
@@ -45,6 +71,7 @@ const UserCard = (props) => {
                         <Fragment>
                            {props.userIsAdmin ? <DeleteIcon cursor="pointer" w={5} h={5} color="litegrey.400" 
                            ml={["55px", "55px", "80px", "80px", "80px"]}
+                           onClick={deleteUser}
                            /> : null}
                         </Fragment>}
                     </Flex>
