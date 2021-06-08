@@ -25,7 +25,7 @@ const Navbar = () => {
     }
 
     const login = () => {
-        authCtx.login("dummy")
+        authCtx.login()
     }
  
     return(
