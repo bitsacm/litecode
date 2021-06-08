@@ -7,7 +7,8 @@ import { DummyData } from '../resources/dummy.js'
 import { Redirect, Link } from 'react-router-dom'
 
 const Room = () => {
-    const [userIsAdmin, setUserIsAdmin]=useState(null);
+    const [userIsAdmin, setUserIsAdmin] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
     const [roomDetails, updateRoomDetails] = useState(null)
     const [redirect, setRedirect] = useState(null);
 
@@ -37,9 +38,10 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    const userID = res.data.user.roomID
-                    setUserIsAdmin(res.data.user._id)
-                    getRoomDetails(userID);
+                    console.log(res.data);
+                    setUserInfo(res.data)
+                    const roomID = res.data.user.roomID
+                    getRoomDetails(roomID);
                 } else {
                     alert("ERROR POSTING CONTENT.");
                 }
@@ -62,10 +64,8 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    const boolBoi = (userIsAdmin === res.data.room.roomAdmin)
-                    setUserIsAdmin(boolBoi);
-                    updateRoomDetails(res.data);
-                    console.log(res.data)
+                    console.log(res.data.room.roomAdmin)
+                    updateRoomDetails(res.data)
                 } else {
                     alert("ERROR POSTING CONTENT.");
                 }
@@ -75,7 +75,7 @@ const Room = () => {
     const lockRoom = () => {
         fetch('http://localhost:3000/lock',
                 {   
-                    method: 'POST',
+                    method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer '+token,
@@ -146,8 +146,8 @@ const Room = () => {
                             name={user.userID.name}
                             imgUrl={user.userID.avatar}
                             phone={user.userID.phoneNo}
-                            isAdmin={user._id===roomDetails.room.roomAdmin}
-                            userIsAdmin={user._id===roomDetails.room.roomAdmin}
+                            isAdmin={user.userID._id===roomDetails.room.roomAdmin}
+                            userIsAdmin={user.userID._id===roomDetails.room.roomAdmin}
                         />
                     ))}
                 </Flex>
@@ -183,9 +183,9 @@ const Room = () => {
                 fontSize="28px"
                 color="litegrey.600">₹ {roomDetails.room.costPerMember}</Text>
 
-                {userIsAdmin ? 
-                    <Button bg="liteblue" width="150px" mt="40px" color="white" onClick={lockRoom}>Lock Group</Button> : 
-                    <Button bg="red" width="150px" mt="40px" color="white" onClick={leaveRoom}>Leave Group</Button>}
+                {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
+                    <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Lock Group</Button> : null}
+                    <Button bg="red" width="150px" mt="40px" color="white" onClick={leaveRoom}>Leave Group</Button>
             </Box>
             </Flex>
             </Fragment>:<Spinner />}

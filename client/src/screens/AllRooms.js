@@ -78,7 +78,7 @@ const AllRooms = (props) => {
             <Fragment>
 
             
-            <Box margin="auto" display="flex" justifyContent="center" alignItems="center"  width="100%"><InputGroup 
+            <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%"><InputGroup 
                 width={["350px", "80%", "40%", "40%", "40%"]}
                 height="0px"                
                 m="20px"    
@@ -168,7 +168,7 @@ const InitialFocus = (props) =>  {
   
     return (
       <>
-        <Button mt="20px" onClick={onOpen}>Create New Room</Button>
+        <Button mt="20px" color="white" bg="liteblue" onClick={onOpen}>Create New Room</Button>
   
         <Modal
           initialFocusRef={initialRef}

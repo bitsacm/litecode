@@ -80,6 +80,7 @@ const Navbar = () => {
                     boxSize={["35px", "35px", "40px", "40px", "40px"]}
                     objectFit="cover"
                     src={logoutpng}
+                    cursor="pointer"
                     padding="6px"
                     opacity="0.2"
                     onClick={logout}

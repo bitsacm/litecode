@@ -93,10 +93,10 @@ const Landing = () => {
                 </Flex>
                 
                 <Button 
+                    color="white" 
                     bg="liteblue" 
                     mt="20px" 
                     fontSize="24px" 
-                    color="white" 
                     width="250px" 
                     height="50px" 
                     borderRadius="12px"
