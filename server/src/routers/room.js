@@ -35,8 +35,6 @@ router.post('/createRoom', auth, async (req, res) => {
     if (req.user.inRoom) {
         const room2 = await Room.findOne({ roomID: req.user.roomID })
 
-        req.user.inRoom = false
-        req.user.roomID = "nil"
         room2.usersInRoom--
         room2.roomFull = false
 
@@ -51,8 +49,6 @@ router.post('/createRoom', auth, async (req, res) => {
                 room2.roomAdmin = null
             }
         }
-
-        await req.user.save()
         await room2.save()
     }
 
