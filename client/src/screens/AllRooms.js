@@ -168,7 +168,7 @@ const InitialFocus = (props) =>  {
   
     return (
       <>
-        <Button onClick={onOpen}>Create New Room</Button>
+        <Button mt="20px" onClick={onOpen}>Create New Room</Button>
   
         <Modal
           initialFocusRef={initialRef}

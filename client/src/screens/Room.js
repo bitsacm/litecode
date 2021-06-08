@@ -163,7 +163,7 @@ const Room = () => {
                 <Text
                  fontSize="28px"
                  color="litegrey.600"
-                >{roomDetails.room.name}</Text>
+                >{roomDetails.room.roomID}</Text>
 
                 <Heading
                 mt="20px"
