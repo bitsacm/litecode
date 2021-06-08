@@ -28,7 +28,7 @@ const Landing = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     const login = () => {
-        fetch('https://acm-litecode.herokuapp.com/auth/google/',
+        fetch('http://localhost:3000/auth/google/',
                 {   
                     method: 'GET',
                     headers: {

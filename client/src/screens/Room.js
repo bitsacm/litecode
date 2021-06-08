@@ -20,7 +20,7 @@ const Room = () => {
 
 
     const loadRoom = () => {
-        fetch('http://acm-litecode.herokuapp.com/users/me',
+        fetch('http://localhost:3000/users/me',
                 {   
                     method: 'GET',
                     headers: {
@@ -45,7 +45,7 @@ const Room = () => {
     }
 
     const getRoomDetails = (roomID) => {
-        fetch('http://acm-litecode.herokuapp.com/room/'+roomID,
+        fetch('http://localhost:3000/room/'+roomID,
                 {   
                     method: 'GET',
                     headers: {
@@ -71,7 +71,7 @@ const Room = () => {
     }
 
     const lockRoom = () => {
-        fetch('http://acm-litecode.herokuapp.com/lock',
+        fetch('http://localhost:3000/lock',
                 {   
                     method: 'POST',
                     headers: {
@@ -94,7 +94,7 @@ const Room = () => {
     }
 
     const leaveRoom = () => {
-        fetch('http://acm-litecode.herokuapp.com/leaveRoom',
+        fetch('http://localhost:3000/leaveRoom',
                 {   
                     method: 'POST',
                     headers: {

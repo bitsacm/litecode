@@ -29,7 +29,7 @@ const AllRooms = () => {
     }, [])
 
     const getRooms = () => {
-        fetch('http://acm-litecode.herokuapp.com/rooms/',
+        fetch('http://localhost:3000/rooms/',
                 {   
                     method: 'GET',
                     headers: {

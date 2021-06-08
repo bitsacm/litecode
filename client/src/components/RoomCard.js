@@ -32,7 +32,7 @@ const RoomCard = (props) => {
     const token = authCtx.token;
 
     const joinRoom = () => {
-        fetch('http://acm-litecode.herokuapp.com/joinRoom/'+roomId,
+        fetch('http://localhost:3000/joinRoom/'+roomId,
                 {   
                     method: 'POST',
                     headers: {
