@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout'
@@ -10,13 +10,49 @@ import AuthContext from './store/auth';
 
 function App() {
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
   const isLoggedIn = authCtx.isLoggedIn
   const hasRoom=true;
+
+  const [mobile, setMobile] = useState(null);
+
+
+  useEffect(() => {
+    getMobile();
+  }, [])
+
+  const getMobile = () => {
+    fetch('http://localhost:3000/users/me',
+            {   
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token,
+                }
+            }
+        ).then(response => 
+            response.json().then(data => ({
+                data: data,
+                status: response.status
+            })
+        ).then(res => {
+            if(res.data){
+              if (res.data.userID.phoneNo) {
+                const phone = res.data.userID.phoneNo
+                setMobile(phone)
+              }
+            } else {
+                alert("ERROR POSTING CONTENT.");
+            }
+        }))
+}
+
 
   return (
     <div>
       <Layout>
         <Switch>
+
           <Route path="/" exact>
             {isLoggedIn ? <Redirect to="/allrooms" /> : <Landing />}
           </Route>
@@ -30,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/allrooms">
-            {isLoggedIn ? <AllRooms /> : <Redirect to="/" />}
+            {isLoggedIn ? <AllRooms mobile={mobile} setMobile={setMobile}/> : <Redirect to="/" />}
           </Route>
 
           <Route path="*">

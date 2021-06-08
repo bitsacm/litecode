@@ -7,20 +7,31 @@ import {
     Flex, 
     Box, 
     Heading, 
-    Input,
     InputGroup,
     Spinner,
     InputLeftElement,
+    Modal, 
+    useDisclosure, 
+    ModalOverlay, 
+    ModalContent, 
+    ModalHeader, 
+    ModalCloseButton, 
+    ModalBody, 
+    FormControl, 
+    FormLabel, 
+    Input, 
+    ModalFooter, 
+    Button, 
 } from '@chakra-ui/react'
 
 import {SearchIcon} from '@chakra-ui/icons'
 import RoomCard from '../components/RoomCard.js'
 
 
-const AllRooms = () => {
+const AllRooms = (props) => {
 
     const [allRooms, setAllRooms] = useState(null);
-
+    const [newf, setNewf] = useState(null);
     const [redirect, setRedirect] = useState(null);
 
     const authCtx = useContext(AuthContext);
@@ -65,7 +76,9 @@ const AllRooms = () => {
         <Flex width="100%"  flexDirection="column" justifyContent="center" alignItems="center">
             {allRooms ? 
             <Fragment>
-            <Box margin="auto" display="flex"justifyContent="center" alignItems="center"  width="100%"><InputGroup 
+
+            
+            <Box margin="auto" display="flex" justifyContent="center" alignItems="center"  width="100%"><InputGroup 
                 width={["350px", "80%", "40%", "40%", "40%"]}
                 height="0px"                
                 m="20px"    
@@ -92,7 +105,9 @@ const AllRooms = () => {
                     placeholder="Looking for a friend's group?" 
                 />
 
-            </InputGroup></Box>
+            </InputGroup>
+            <InitialFocus newf={newf} setRedirect={setRedirect}/>
+            </Box>
             
             <Box display="flex" width="100%" margin="auto">
                 {allRooms ? 
@@ -109,5 +124,77 @@ const AllRooms = () => {
         
     )
 }
+
+const InitialFocus = (props) =>  {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+  
+    const initialRef = React.useRef()
+    const nameRef = React.useRef()
+    const finalRef = React.useRef()
+
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
+   
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const name = nameRef.current.value;
+
+        fetch('http://localhost:3000/createRoom?roomName='+name,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+token,
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    console.log("created")
+                    props.setRedirect();
+                } else {
+                    alert("Authentication failed. Please try again.");
+                }
+            }))
+    }
+
+
+  
+    return (
+      <>
+        <Button onClick={onOpen}>Create New Room</Button>
+  
+        <Modal
+          initialFocusRef={initialRef}
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Create a new room</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Add a Room Name</FormLabel>
+                <Input type="text" ref={nameRef} fontWeight="500" placeholder="Litecode by ACM" />
+              </FormControl>
+            </ModalBody>
+  
+            <ModalFooter>
+              <Button onClick={submitHandler} colorScheme="blue" mr={3}>
+                Create
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    )
+  }
 
 export default AllRooms;
