@@ -28,7 +28,26 @@ const Landing = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     const login = () => {
-        authCtx.login("dummy")
+        fetch('https://acm-litecode.herokuapp.com/auth/google/',
+                {   
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data){
+                    const url = res.data.googleLoginUrl
+                    window.location.href = url;
+                } else {
+                    alert("ERROR RETRIEVING CONTENT.");
+                }
+            }))
     }
 
     return(

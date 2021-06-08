@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
+import AuthContext from '../store/auth.js'
 
 import {
     Heading,
@@ -27,13 +28,16 @@ const RoomCard = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const roomId = props.room.roomID;
 
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
+
     const joinRoom = () => {
         fetch('http://acm-litecode.herokuapp.com/joinRoom/'+roomId,
                 {   
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 

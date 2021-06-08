@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
+import AuthContext from '../store/auth.js'
 import { useHistory } from 'react-router-dom'
 import UserCard from '../components/UserCard.js'
 import { Flex, Box, Heading, Text, Button, Spinner } from '@chakra-ui/react'
@@ -7,6 +8,9 @@ import { DummyData } from '../resources/dummy.js'
 const Room = () => {
     const [userIsAdmin, setUserIsAdmin]=useState(null);
     const [roomDetails, updateRoomDetails] = useState(null)
+
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
 
     const history = useHistory();
 
@@ -21,7 +25,7 @@ const Room = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 
@@ -46,7 +50,7 @@ const Room = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 
@@ -72,7 +76,7 @@ const Room = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 
@@ -95,7 +99,7 @@ const Room = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 

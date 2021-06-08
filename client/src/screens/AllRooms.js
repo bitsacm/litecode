@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useContext } from 'react'
+import AuthContext from '../store/auth.js'
 import { DummyData } from '../resources/dummy.js'
 
 import { 
@@ -19,6 +20,9 @@ const AllRooms = () => {
 
     const [allRooms, setAllRooms] = useState(null);
 
+    const authCtx = useContext(AuthContext);
+    const token = authCtx.token;
+
 
     useEffect(() => {
         getRooms()
@@ -30,7 +34,7 @@ const AllRooms = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJiZGZhNWNiZjYzZjAwMTU4MDlmMTEiLCJpYXQiOjE2MjI5NzUzNTh9.kXulQ8_ZnKWk2tyCiY8ij8vhWm7RfGNCKBmAmuTIPWU'
+                        'Authorization': 'Bearer '+token,
                     }
                 }
             ).then(response => 
