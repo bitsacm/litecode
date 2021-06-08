@@ -4,10 +4,12 @@ import { useHistory } from 'react-router-dom'
 import UserCard from '../components/UserCard.js'
 import { Flex, Box, Heading, Text, Button, Spinner } from '@chakra-ui/react'
 import { DummyData } from '../resources/dummy.js'
+import { Redirect, Link } from 'react-router-dom'
 
 const Room = () => {
     const [userIsAdmin, setUserIsAdmin]=useState(null);
     const [roomDetails, updateRoomDetails] = useState(null)
+    const [redirect, setRedirect] = useState(null);
 
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
@@ -16,7 +18,7 @@ const Room = () => {
 
     useEffect(() => {
         loadRoom()
-    }, [])
+    }, [redirect])
 
 
     const loadRoom = () => {
@@ -110,14 +112,21 @@ const Room = () => {
             ).then(res => {
                 if(res.data){
                     console.log(res.data)
+                    updateRedirect()
                 } else {
                     alert("ERROR POSTING CONTENT.");
                 }
             }))
     }
 
+    const updateRedirect = () => {
+        setRedirect("non-null")
+    }
+
 
     return(
+        <Fragment>
+        { redirect===null ?
         <Fragment>
             {roomDetails ? 
             <Fragment>
@@ -180,6 +189,7 @@ const Room = () => {
             </Box>
             </Flex>
             </Fragment>:<Spinner />}
+        </Fragment> : <Redirect to="/allrooms" />}
         </Fragment>
     )
 }

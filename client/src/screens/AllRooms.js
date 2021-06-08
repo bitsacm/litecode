@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react'
 import AuthContext from '../store/auth.js'
+import { Redirect, Link } from 'react-router-dom'
 import { DummyData } from '../resources/dummy.js'
 
 import { 
@@ -20,13 +21,15 @@ const AllRooms = () => {
 
     const [allRooms, setAllRooms] = useState(null);
 
+    const [redirect, setRedirect] = useState(null);
+
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
 
 
     useEffect(() => {
         getRooms()
-    }, [])
+    }, [redirect])
 
     const getRooms = () => {
         fetch('http://localhost:3000/rooms/',
@@ -52,8 +55,13 @@ const AllRooms = () => {
             }))
     }
 
+    const updateRedirect =() => {
+        setRedirect("pls redirect lol")
+    }
+
     return(
-        
+        <Fragment>
+        {redirect===null ? 
         <Flex width="100%"  flexDirection="column" justifyContent="center" alignItems="center">
             {allRooms ? 
             <Fragment>
@@ -90,12 +98,14 @@ const AllRooms = () => {
                 {allRooms ? 
                 <Flex margin="auto" flexDirection="row" justifyContent="center" alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
-                        <RoomCard room={room} />
+                        <RoomCard updateRedirect={updateRedirect} room={room} />
                     ))}
                 </Flex>:null}
             </Box>
             </Fragment>: <Spinner />}
-        </Flex>
+            
+        </Flex>: <Redirect to="/room" />}
+        </Fragment>
         
     )
 }

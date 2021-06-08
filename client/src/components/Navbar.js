@@ -22,6 +22,7 @@ const Navbar = () => {
 
     const logout = () => {
         authCtx.logout()
+        window.location.reload();
     }
 
     const login = () => {

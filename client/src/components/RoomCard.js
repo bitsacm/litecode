@@ -47,7 +47,9 @@ const RoomCard = (props) => {
                 })
             ).then(res => {
                 if(res.data){
-                    console.log(res.data);
+                    console.log("do u see me")
+                    props.updateRedirect();
+                    
                 } else {
                     alert("ERROR POSTING CONTENT.");
                 }
