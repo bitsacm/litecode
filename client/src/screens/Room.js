@@ -89,6 +89,7 @@ const Room = () => {
             ).then(res => {
                 if(res.data){
                     console.log(res.data)
+                    loadRoom();
                 } else {
                     alert("ERROR POSTING CONTENT.");
                 }
@@ -186,7 +187,10 @@ const Room = () => {
                 color="litegrey.600">₹ {roomDetails.room.costPerMember}</Text>
 
                 {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
-                    <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Lock Group</Button> : null}
+                    <Fragment> {roomDetails.room.roomLocked ? 
+                        <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Unlock Group</Button>: 
+                        <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Lock Group</Button>}
+                         </Fragment>: null}
                     <Button bg="red" width="150px" mt="40px" color="white" onClick={leaveRoom}>Leave Group</Button>
             </Box>
             </Flex>
