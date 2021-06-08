@@ -70,6 +70,7 @@ router.post('/createRoom', auth, async (req, res) => {
 // @access  Private
 router.get('/rooms', auth, async (req, res) => {
     try {
+        await Room.deleteMany({usersInRoom: 0})
         const rooms = await Room.find({ roomFull: false, roomLocked: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
     } catch (err) {
