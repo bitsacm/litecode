@@ -5,21 +5,21 @@ const crypto = require("crypto")
 const auth = require('../middleware/auth')
 
 // @desc    Create New Room
-// @access  Public
+// @access  Private
 // query params -> /createRoom?roomName=randomGroup123
 // if no query, random 6 character hex string
-router.post('/createRoom', async (req, res) => {
+router.post('/createRoom', auth, async (req, res) => {
     const query = req.query.roomName
     const room = new Room({
         users: []
     })
+
     if (query) {
         const roomDuplicate = await Room.findOne({ roomID: query })
         if (roomDuplicate) {
             return res.status(400).json({ error: 'room with that name already exists' })
         }
         room.roomID = query
-        
     } else {
         while (1) {
             var id = crypto.randomBytes(3).toString('hex')
@@ -31,7 +31,43 @@ router.post('/createRoom', async (req, res) => {
         room.roomID = id
     }
     await room.save()
-    res.status(201).json(room)
+
+    if (req.user.inRoom) {
+        const room2 = await Room.findOne({ roomID: req.user.roomID })
+
+        req.user.inRoom = false
+        req.user.roomID = "nil"
+        room2.usersInRoom--
+        room2.roomFull = false
+
+        room2.users = room2.users.filter((user) => {
+            return !user.userID.equals(req.user._id)//If the id isn't equal, it stays in the array.
+        })
+
+        if (room2.roomAdmin.equals(req.user._id)) {
+            if (room2.usersInRoom) {
+                room2.roomAdmin = room2.users[0].userID
+            } else {
+                room2.roomAdmin = null
+            }
+        }
+
+        await req.user.save()
+        await room2.save()
+    }
+
+    const userID = req.user._id
+    req.user.inRoom = true
+    req.user.roomID = room.roomID
+    room.usersInRoom++
+    room.users = room.users.concat({ userID })
+    room.roomAdmin = userID
+
+    await req.user.save()
+    await room.save()
+
+    const user = req.user
+    res.status(200).json({ user, room })
 })
 
 // @desc    GET all rooms which are not full/locked
