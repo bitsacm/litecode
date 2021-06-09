@@ -37,12 +37,13 @@ const Room = () => {
                     status: response.status
                 })
             ).then(res => {
-                if(res.data){
+                // console.log(res.data)
+                if(res.data.user.inRoom){
                     setUserInfo(res.data)
                     const roomID = res.data.user.roomID
                     getRoomDetails(roomID);
                 } else {
-                    alert("ERROR POSTING CONTENT.");
+                    updateRedirect()
                 }
             }))
     }
