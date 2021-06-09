@@ -136,15 +136,14 @@ const AddMobile = (props) => {
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
 
-    const mobileRef = useRef();
+    const [refMobile, setRefMobile] = React.useState("")
+    const handleChange = (event) => setRefMobile(event.target.value)
 
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        const mobile = mobileRef.current.value;
-
-        if (mobile) {
+        if (refMobile.length === 10) {
             fetch('http://localhost:3000/users/me',
                 {
                     method: 'PATCH',
@@ -154,7 +153,7 @@ const AddMobile = (props) => {
                     },
                     body: JSON.stringify(
                         {
-                            phoneNo: mobile
+                            phoneNo: refMobile
                         }
                     ),
                 }
@@ -165,11 +164,14 @@ const AddMobile = (props) => {
                 })
             ).then(res => {
                 if(res.data){
-                    props.setMobile(mobile)
+                    props.setMobile(refMobile)
                 } else {
                     alert("Please try again.");
                 }
             }))
+        }
+        else {
+          alert("Please enter a valid phone number!.")
         }
     }
 
@@ -193,9 +195,17 @@ const AddMobile = (props) => {
                             <FormLabel fontWeight="medium" fontSize="24px" color="litegrey.600">Mobile Number</FormLabel>
                             <InputGroup>
                               <InputLeftAddon children="+91" />
-                              <Input type="tel" fontWeight="medium" placeholder="phone number" ref={mobileRef} />
+                              <Input 
+                                type="tel" 
+                                fontWeight="medium" 
+                                placeholder="phone number"
+                                isInvalid={!(refMobile.length === 10)} 
+                                errorBorderColor="red.300"
+                                borderColor="liteblue"
+                                onChange={handleChange}
+                              />
                             </InputGroup>
-                            <FormHelperText fontSize="18px" fontWeight="medium">Enter your mobile number.</FormHelperText>
+                            <FormHelperText fontSize="18px" fontWeight="medium" fontSize="18px">Please enter your 10-digit phone number.</FormHelperText>
                         </FormControl>
     
                         <Button
@@ -205,7 +215,7 @@ const AddMobile = (props) => {
                             marginTop="30px"
                             padding="24px"
                             fontSize="22px"
-                        >Add Mobile Number</Button>
+                        >Add my number</Button>
                 </Box>
             </Flex>
         </Fragment>
