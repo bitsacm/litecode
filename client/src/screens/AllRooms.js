@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useContext } from 'react'
+import React, { Fragment, useEffect, useState, useContext, useRef } from 'react'
 import AuthContext from '../store/auth.js'
 import { Redirect, Link } from 'react-router-dom'
 import { DummyData } from '../resources/dummy.js'
@@ -22,6 +22,7 @@ import {
     Input, 
     ModalFooter, 
     Button, 
+    IconButton,
 } from '@chakra-ui/react'
 
 import {SearchIcon} from '@chakra-ui/icons'
@@ -66,7 +67,35 @@ const AllRooms = (props) => {
             }))
     }
 
-    const updateRedirect =() => {
+    const searchRef = useRef();
+
+    const submitFunction = () => {
+        const search = searchRef.current.value;
+
+        fetch('http://localhost:3000/rooms/?roomID='+search,
+            {   
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token,
+                }
+            }
+        ).then(response => 
+            response.json().then(data => ({
+                data: data,
+                status: response.status
+            })
+        ).then(res => {
+            if(res.data){
+                console.log(res.data);
+                setAllRooms(res.data)
+            } else {
+                alert("ERROR RETRIEVING CONTENT.");
+            }
+        }))
+    }
+
+    const updateRedirect = () => {
         setRedirect("pls redirect lol")
     }
 
@@ -78,21 +107,15 @@ const AllRooms = (props) => {
             <Fragment>
 
             
-            <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%"><InputGroup 
+            <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%">
+            <InputGroup 
                 width={["350px", "80%", "40%", "40%", "40%"]}
                 height="0px"                
                 m="20px"    
                 mt="50px"
                 mb="70px"
                 border="none"
-             
             >
-
-                <InputLeftElement
-                    ml="5px"
-                    pointerEvents="none"
-                    children={<SearchIcon color="litegrey.600" />}
-                />
 
                 <Input 
                     ml="5px" 
@@ -102,7 +125,18 @@ const AllRooms = (props) => {
                     fontWeight="medium" 
                     height="40px" 
                     borderRadius="10" 
+                    ref={searchRef}
                     placeholder="Looking for a friend's group?" 
+                />
+
+                <IconButton 
+                    aria-label="Search database" 
+                    onClick={submitFunction} 
+                    icon={<SearchIcon color="litegrey.600"/>} 
+                    ml="5px" 
+                    bg="#EDF2F7" 
+                    border="none" 
+                    color="litegrey.400" 
                 />
 
             </InputGroup>
