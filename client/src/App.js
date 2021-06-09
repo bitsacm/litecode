@@ -143,7 +143,7 @@ const AddMobile = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if (refMobile.length === 10) {
+        if (refMobile.length === 10 && !(isNaN(refMobile))) {
             fetch('http://localhost:3000/users/me',
                 {
                     method: 'PATCH',
@@ -171,7 +171,7 @@ const AddMobile = (props) => {
             }))
         }
         else {
-          alert("Please enter a valid phone number!.")
+          alert("Please enter your valid phone number.")
         }
     }
 
@@ -192,14 +192,14 @@ const AddMobile = (props) => {
                     borderColor="grey.20">
                 
                         <FormControl id="email">
-                            <FormLabel fontWeight="medium" fontSize="24px" color="litegrey.600">Mobile Number</FormLabel>
+                            <FormLabel fontWeight="medium" fontSize="24px" color="litegrey.600">WhatsApp Number</FormLabel>
                             <InputGroup>
                               <InputLeftAddon children="+91" />
                               <Input 
                                 type="tel" 
                                 fontWeight="medium" 
                                 placeholder="phone number"
-                                isInvalid={!(refMobile.length === 10)} 
+                                isInvalid={!(refMobile.length === 10) || isNaN(refMobile)} 
                                 errorBorderColor="red.300"
                                 borderColor="liteblue"
                                 onChange={handleChange}
