@@ -38,7 +38,6 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    console.log(res.data);
                     setUserInfo(res.data)
                     const roomID = res.data.user.roomID
                     getRoomDetails(roomID);
@@ -64,7 +63,6 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    console.log(res.data.room.roomAdmin)
                     updateRoomDetails(res.data)
                 } else {
                     alert("ERROR POSTING CONTENT.");
@@ -88,7 +86,6 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    console.log(res.data)
                     loadRoom();
                 } else {
                     alert("ERROR POSTING CONTENT.");
@@ -112,7 +109,6 @@ const Room = () => {
                 })
             ).then(res => {
                 if(res.data){
-                    console.log(res.data)
                     updateRedirect()
                 } else {
                     alert("ERROR POSTING CONTENT.");
@@ -147,7 +143,7 @@ const Room = () => {
                             name={user.userID.name}
                             id={user.userID._id}
                             imgUrl={user.userID.avatar}
-                            phone={user.userID.phoneNo}
+                            phoneNo={user.userID.phoneNo}
                             loadRoom={loadRoom}
                             isAdmin={user.userID._id===roomDetails.room.roomAdmin}
                             userIsAdmin={(roomDetails.room.roomAdmin === userInfo.user._id)}

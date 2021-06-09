@@ -75,7 +75,7 @@ const UserCard = (props) => {
                            /> : null}
                         </Fragment>}
                     </Flex>
-                    <Text fontSize="20px" color="litegrey.400" fontWeight="medium">{props.phone}</Text>
+                    <Text fontSize="20px" color="litegrey.400" fontWeight="medium">{props.phoneNo}</Text>
                 </Flex>
             </Flex>
         </Fragment>

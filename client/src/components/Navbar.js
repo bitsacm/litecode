@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { 
     HStack, 
@@ -19,6 +19,13 @@ import logoutpng from '../resources/img/logout.png'
 const Navbar = () => {
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
+    const token = authCtx.token;
+
+    const [hasRoom, setHasRoom] = useState(true);
+
+    // useEffect(()=>{
+    //     doesHaveRoom()
+    // })
 
     const logout = () => {
         authCtx.logout()
@@ -28,6 +35,31 @@ const Navbar = () => {
     const login = () => {
         authCtx.login()
     }
+
+    // const doesHaveRoom = () => {
+    //     fetch('http://localhost:3000/users/me',
+    //             {   
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Authorization': 'Bearer '+token,
+    //                 }
+    //             }
+    //         ).then(response => 
+    //             response.json().then(data => ({
+    //                 data: data,
+    //                 status: response.status
+    //             })
+    //         ).then(res => {
+    //             if(res.data){
+    //               if (res.data.user.inRoom) {
+    //                 setHasRoom(true)
+    //               }
+    //             } else {
+    //                 
+    //             }
+    //         }))
+    //   }
  
     return(
         <Flex 
@@ -58,6 +90,7 @@ const Navbar = () => {
 
             {isLoggedIn ? 
             <Fragment>
+                {hasRoom? 
                 <NavLink activeClassName="activeLink" to="/room">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
@@ -65,7 +98,7 @@ const Navbar = () => {
                         fontWeight="medium"
                         marginRight={["10px", "10px", "25px", "25px", "25px"]}
                     >My Room</Text>
-                </NavLink>
+                </NavLink>:null}
 
                 <NavLink activeClassName="activeLink" to="/allrooms">
                     <Text
