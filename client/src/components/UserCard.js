@@ -66,6 +66,7 @@ const UserCard = (props) => {
                             pl="5px"
                             fontSize={["14px", "14px", "18px", "18px", "18px"]}
                             borderRadius="2px"
+                            fontWeight="medium"
                          >ADMIN</Text> 
                         : 
                         <Fragment>

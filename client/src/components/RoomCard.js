@@ -132,6 +132,7 @@ const RoomCard = (props) => {
                                 <Text
                                 fontSize="25px"
                                 color="litegrey.400"
+                                fontWeight="medium"
                                 >You Pay</Text>
                                 <Heading
                                 mt="-5px"
@@ -154,7 +155,7 @@ const RoomCard = (props) => {
                                     fontSize="18px"
                                     color="litegrey.400"
                                     fontWeight="medium"
-                                    mt="-5px"
+                                    mt="-10px"
                                     mb="25px"
                                 >You're already in a room!</Text> :
                                 null }

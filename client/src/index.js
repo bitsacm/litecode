@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from "@chakra-ui/react"
 import { AuthContextProvider } from './store/auth';
+import 'typeface-roboto'
 
 import './index.css';
 import App from './App';

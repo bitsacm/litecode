@@ -241,11 +241,11 @@ const InitialFocus = (props) =>  {
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Create a new room</ModalHeader>
+            <ModalHeader color="litegrey.600">Create a new room</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <FormControl>
-                <FormLabel>Add a Room Name</FormLabel>
+                <FormLabel color="litegrey.600">Add a Room Name</FormLabel>
                 <Input type="text" ref={nameRef} fontWeight="500" placeholder="Litecode by ACM" />
               </FormControl>
             </ModalBody>

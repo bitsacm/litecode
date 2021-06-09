@@ -163,6 +163,7 @@ const Room = () => {
                 <Text
                  fontSize="28px"
                  color="litegrey.600"
+                 fontWeight="bold"
                 >{roomDetails.room.roomID}</Text>
 
                 <Heading
@@ -172,6 +173,7 @@ const Room = () => {
                 fontWeight="medium">Members</Heading>
                 <Text
                 fontSize="28px"
+                fontWeight="bold"
                 color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
 
                 <Heading
@@ -181,7 +183,9 @@ const Room = () => {
                 fontWeight="medium">Per Member</Heading>
                 <Text
                 fontSize="28px"
-                color="litegrey.600">₹ {roomDetails.room.costPerMember}</Text>
+                color="litegrey.600"
+                fontWeight="bold"
+                >₹ {roomDetails.room.costPerMember}</Text>
 
                 {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
                     <Fragment> {roomDetails.room.roomLocked ? 
