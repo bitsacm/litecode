@@ -70,9 +70,27 @@ router.post('/createRoom', auth, async (req, res) => {
 // @access  Private
 router.get('/rooms', auth, async (req, res) => {
     try {
-        await Room.deleteMany({usersInRoom: 0})
+        await Room.deleteMany({ usersInRoom: 0 })
         const rooms = await Room.find({ roomFull: false, roomLocked: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
+    } catch (err) {
+        res.status(400).json({ error: `${err}` })
+    }
+})
+
+// @desc    GET all rooms which are not full/locked and match the inputed query
+// @access  Private
+// query params -> /searchRoom?roomName=randomGroup123
+router.get('/searchRoom', auth, async (req, res) => {
+    const query = req.query.roomName
+    try {
+        if (query) {
+            const rooms = await Room.find({ roomFull: false, roomLocked: false, roomID: new RegExp(query, 'i') }).sort({ usersInRoom: "desc" }).populate('users.userID')
+            res.status(200).json(rooms)
+        }
+        else{
+            res.redirect('/rooms')
+        }
     } catch (err) {
         res.status(400).json({ error: `${err}` })
     }
