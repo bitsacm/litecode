@@ -72,7 +72,7 @@ const AllRooms = (props) => {
     const submitFunction = () => {
         const search = searchRef.current.value;
 
-        fetch('http://localhost:3000/rooms/?roomID='+search,
+        fetch('http://localhost:3000/searchRoom/?roomName='+search,
             {   
                 method: 'GET',
                 headers: {
