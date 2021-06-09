@@ -137,8 +137,8 @@ const Room = () => {
 
         <Flex flexDir={["column", "column", "row", "row", "row"]}>
 
-            <Box display="flex" width="70%">
-                <Flex margin="auto"flexDirection="row" mt="30px" flexWrap="wrap">
+            <Box display="flex" justifyContent="flex-start" width="70%">
+                <Flex margin="auto" justifyContent="flex-start" flexDirection="row" mt="30px" width="100%" flexWrap="wrap">
                     {roomDetails.room.users.map((user, index)=>(
                         <UserCard 
                             name={user.userID.name}
@@ -155,6 +155,7 @@ const Room = () => {
             <Box display="flex" flexDir="column" mt="40px" 
             width={["70%", "70%", "30%", "30%", "30%"]}
             >
+                <Box>
                 <Heading
                     fontSize="20px"
                     color="litegrey.400"
@@ -165,7 +166,9 @@ const Room = () => {
                  color="litegrey.600"
                  fontWeight="bold"
                 >{roomDetails.room.roomID}</Text>
+                </Box>
 
+                <Box>
                 <Heading
                 mt="20px"
                 fontSize="20px"
@@ -175,7 +178,9 @@ const Room = () => {
                 fontSize="28px"
                 fontWeight="bold"
                 color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
+                </Box>
 
+                <Box>
                 <Heading
                  mt="20px"
                 fontSize="20px"
@@ -186,6 +191,7 @@ const Room = () => {
                 color="litegrey.600"
                 fontWeight="bold"
                 >₹ {roomDetails.room.costPerMember}</Text>
+                </Box>
 
                 {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
                     <Fragment> {roomDetails.room.roomLocked ? 

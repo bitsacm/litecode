@@ -16,6 +16,8 @@ import imgurl from '../resources/img/keyboard.png'
 import acmlogo from '../resources/img/acmlogo.png'
 import logoutpng from '../resources/img/logout.png'
 
+import '../index.css'
+
 const Navbar = () => {
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
@@ -27,10 +29,10 @@ const Navbar = () => {
     //     doesHaveRoom()
     // })
 
-    const logout = () => {
-        authCtx.logout()
-        window.location.reload();
-    }
+    // const logout = () => {
+    //     authCtx.logout()
+    //     window.location.reload();
+    // }
 
     const login = () => {
         authCtx.login()
@@ -105,11 +107,11 @@ const Navbar = () => {
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
                         fontWeight="medium"
-                        marginRight={["2px", "10px", "25px", "25px", "25px"]}
+                        marginRight={["2px", "5px", "25px", "25px", "25px"]}
                     >All Rooms</Text>
                 </NavLink>
 
-                <Image 
+                {/* <Image 
                     boxSize={["35px", "35px", "40px", "40px", "40px"]}
                     objectFit="cover"
                     src={logoutpng}
@@ -117,7 +119,7 @@ const Navbar = () => {
                     padding="6px"
                     opacity="0.2"
                     onClick={logout}
-                />
+                /> */}
             </Fragment> :
             <Image 
                 height={["30px", "30px", "40px", "40px", "40px"]}

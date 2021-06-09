@@ -32,6 +32,7 @@ import RoomCard from '../components/RoomCard.js'
 const AllRooms = (props) => {
 
     const [allRooms, setAllRooms] = useState(null);
+    const [callRooms, csetAllRooms] = useState(null);
     const [newf, setNewf] = useState(null);
     const [redirect, setRedirect] = useState(null);
     const [userInRoom, setUserInRoom] = useState(false);
@@ -91,6 +92,7 @@ const AllRooms = (props) => {
                 if(res.data){
                     console.log(res.data);
                     setAllRooms(res.data)
+                    csetAllRooms(res.data)
                 } else {
                     alert("ERROR RETRIEVING CONTENT.");
                 }
@@ -125,6 +127,15 @@ const AllRooms = (props) => {
         }))
     }
 
+    
+    const matchesQuery = (arr, query) => {
+        return arr.filter(el => (el.roomID).toLowerCase().indexOf(query.toLowerCase()) !== -1)
+    }
+
+    const handleChange = () => {
+        setAllRooms(matchesQuery(callRooms, searchRef.current.value))
+    }
+
     const updateRedirect = () => {
         setRedirect("pls redirect lol")
     }
@@ -138,44 +149,43 @@ const AllRooms = (props) => {
 
             
             <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%">
-            <InputGroup 
-                width={["350px", "80%", "40%", "40%", "40%"]}
-                height="0px"                
-                m="20px"    
-                mt="50px"
-                mb="70px"
-                border="none"
-            >
+                <InputGroup 
+                    width={["350px", "80%", "40%", "40%", "40%"]}
+                    height="0px"                
+                    m="20px"    
+                    mt="50px"
+                    mb="70px"
+                    border="none"
+                >
+                    <Input 
+                        ml="5px" 
+                        bg="#EDF2F7" 
+                        border="none" 
+                        color="litegrey.400" 
+                        fontWeight="medium" 
+                        height="40px" 
+                        borderRadius="10" 
+                        ref={searchRef}
+                        onChange={handleChange}
+                        placeholder="Looking for a friend's group?" 
+                    />
 
-                <Input 
-                    ml="5px" 
-                    bg="#EDF2F7" 
-                    border="none" 
-                    color="litegrey.400" 
-                    fontWeight="medium" 
-                    height="40px" 
-                    borderRadius="10" 
-                    ref={searchRef}
-                    placeholder="Looking for a friend's group?" 
-                />
-
-                <IconButton 
-                    aria-label="Search database" 
-                    onClick={submitFunction} 
-                    icon={<SearchIcon color="litegrey.600"/>} 
-                    ml="5px" 
-                    bg="#EDF2F7" 
-                    border="none" 
-                    color="litegrey.400" 
-                />
-
-            </InputGroup>
-            <InitialFocus newf={newf} setRedirect={setRedirect}/>
+                    {/* <IconButton 
+                        aria-label="Search database" 
+                        onClick={submitFunction} 
+                        icon={<SearchIcon color="litegrey.600"/>} 
+                        ml="5px" 
+                        bg="#EDF2F7" 
+                        border="none" 
+                        color="litegrey.400" 
+                    /> */}
+                </InputGroup>
+                <InitialFocus newf={newf} setRedirect={setRedirect}/>
             </Box>
             
-            <Box display="flex" width="100%" margin="auto">
+            <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
                 {allRooms ? 
-                <Flex margin="auto" flexDirection="row" justifyContent="center" alignItems="center" flexWrap="wrap" marginTop="10px">
+                <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "flex-start"]} alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
                         <RoomCard userInRoom={userInRoom} updateRedirect={updateRedirect} room={room} />
                     ))}
