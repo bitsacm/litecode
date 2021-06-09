@@ -34,14 +34,44 @@ const AllRooms = (props) => {
     const [allRooms, setAllRooms] = useState(null);
     const [newf, setNewf] = useState(null);
     const [redirect, setRedirect] = useState(null);
+    const [userInRoom, setUserInRoom] = useState(false);
 
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
 
 
     useEffect(() => {
+        myDeets()
         getRooms()
     }, [redirect])
+
+    const myDeets = () =>{
+        fetch('http://localhost:3000/users/me',
+                {   
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+token,
+                    }
+                }
+            ).then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                if(res.data) {
+                    if (res.data.user.inRoom) {
+                        setUserInRoom(true)
+                    }
+                    else {
+                        setUserInRoom(false)
+                    }
+                }
+            }
+        ))
+    }
+
 
     const getRooms = () => {
         fetch('http://localhost:3000/rooms/',
@@ -147,7 +177,7 @@ const AllRooms = (props) => {
                 {allRooms ? 
                 <Flex margin="auto" flexDirection="row" justifyContent="center" alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
-                        <RoomCard updateRedirect={updateRedirect} room={room} />
+                        <RoomCard userInRoom={userInRoom} updateRedirect={updateRedirect} room={room} />
                     ))}
                 </Flex>:null}
             </Box>

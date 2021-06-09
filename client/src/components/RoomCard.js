@@ -139,9 +139,26 @@ const RoomCard = (props) => {
                                 color="litegrey.600"
                                 mb="30px"
                                 >₹ {props.room.toPay}</Heading>
-                                <Button bg="liteblue" width="150px" borderRadius="10" mb="20px" color="white" onClick={joinRoom}>
+                                <Button 
+                                bg="liteblue" 
+                                width="150px" 
+                                borderRadius="10" 
+                                mb="20px" 
+                                color="white" 
+                                isDisabled={(props.userInRoom)}
+                                onClick={joinRoom}>
                                     Join Group
                                     </Button>
+                                {(props.userInRoom) ? 
+                                <Text 
+                                    fontSize="18px"
+                                    color="litegrey.400"
+                                    fontWeight="medium"
+                                    mt="-5px"
+                                    mb="25px"
+                                >You're already in a room!</Text> :
+                                null }
+                                
                                 </Flex>
                             </Flex>
                         </ModalBody>:null}
