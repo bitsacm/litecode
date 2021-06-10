@@ -101,6 +101,12 @@ const Landing = () => {
                     height="50px" 
                     borderRadius="12px"
                     onClick={login}
+                    _hover={{ bg: "#81C8DC" }}
+                    _active={{
+                        bg: "#81C8DC",
+                        transform: "scale(0.98)",
+                        borderColor: "liteblue",
+                    }}
                 >Create an account ;)</Button>
             </Flex>
 

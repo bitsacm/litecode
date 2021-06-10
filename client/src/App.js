@@ -175,7 +175,7 @@ const AddMobile = (props) => {
         }
     }
 
-
+    
     return(
         <Fragment>
             <Flex 
@@ -221,5 +221,7 @@ const AddMobile = (props) => {
         </Fragment>
     )
 }
+
+// let AddMobile = setTimeout(AddSMobile, 2000);
 
 export default App;

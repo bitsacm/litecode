@@ -39,7 +39,7 @@ const UserCardSm = (props) => {
                         : 
                         null}
                     </Flex>
-                    <Text fontSize="14px" color="litegrey.400" fontWeight="medium">{props.user.phoneNo}</Text>
+                    <Text fontSize="14px" color="litegrey.400" fontWeight="medium">99XXXXXXXX</Text>
                 </Flex>
             </Flex>
         </Fragment>

@@ -195,10 +195,48 @@ const Room = () => {
 
                 {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
                     <Fragment> {roomDetails.room.roomLocked ? 
-                        <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Unlock Group</Button>: 
-                        <Button bg="liteblue" width="150px" mt="40px" mb="-30px" color="white" onClick={lockRoom}>Lock Group</Button>}
+                        <Button 
+                            bg="liteblue" 
+                            width="150px" 
+                            mt="40px" 
+                            mb="-30px" 
+                            color="white" 
+                            onClick={lockRoom}
+                            _hover={{ bg: "#81C8DC" }}
+                            _active={{
+                                bg: "#81C8DC",
+                                transform: "scale(0.98)",
+                                borderColor: "liteblue",
+                            }}
+                        >Unlock Group</Button> : 
+                        <Button 
+                            bg="liteblue" 
+                            width="150px" 
+                            mt="40px" 
+                            mb="-30px" 
+                            color="white" 
+                            onClick={lockRoom}
+                            _hover={{ bg: "#81C8DC" }}
+                            _active={{
+                                bg: "#81C8DC",
+                                transform: "scale(0.98)",
+                                borderColor: "liteblue",
+                            }}
+                        >Lock Group</Button>}
                          </Fragment>: null}
-                    <Button bg="red" width="150px" mt="40px" color="white" onClick={leaveRoom}>Leave Group</Button>
+                    <Button 
+                        bg="#E53E3E" 
+                        width="150px" 
+                        mt="40px" 
+                        color="white" 
+                        onClick={leaveRoom}
+                        _hover={{ bg: "#EF7474" }}
+                        _active={{
+                            bg: "#EF7474",
+                            transform: "scale(0.98)",
+                            borderColor: "red",
+                        }}
+                    >Leave Group</Button>
             </Box>
             </Flex>
             </Fragment>:<Spinner />}

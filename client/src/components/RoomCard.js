@@ -62,6 +62,7 @@ const RoomCard = (props) => {
                 flexDirection="column" 
                 padding="30px" 
                 margin={["0px", "0px", "10px", "10px", "10px"]}
+                mb={["10px", "10px", "0px", "0px", "0px"]}
                 bg="litegrey.20" 
                 width={["300px", "350px", "400px", "400px", "400px"]}
                 borderRadius="10px"
@@ -99,6 +100,12 @@ const RoomCard = (props) => {
                     bg="liteblues"
                     color="liteblue"
                     onClick={onOpen}
+                    _hover={{ bg: "#E4F9FF" }}
+                    _active={{
+                        bg: "#E4F9FF",
+                        transform: "scale(0.98)",
+                        borderColor: "liteblue",
+                    }}
                 >Join</Button>
 
                 <Modal margin="100px" isOpen={isOpen} size="xl" onClose={onClose}>
@@ -147,6 +154,12 @@ const RoomCard = (props) => {
                                 mb="20px" 
                                 color="white" 
                                 isDisabled={(props.userInRoom)}
+                                _hover={{ bg: "#81C8DC" }}
+                                _active={{
+                                    bg: "#81C8DC",
+                                    transform: "scale(0.98)",
+                                    borderColor: "liteblue",
+                                }}
                                 onClick={joinRoom}>
                                     Join Group
                                     </Button>

@@ -150,7 +150,7 @@ const AllRooms = (props) => {
             
             <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%">
                 <InputGroup 
-                    width={["350px", "80%", "40%", "40%", "40%"]}
+                    width={["300px", "80%", "40%", "40%", "40%"]}
                     height="0px"                
                     m="20px"    
                     mt="50px"
@@ -158,7 +158,6 @@ const AllRooms = (props) => {
                     border="none"
                 >
                     <Input 
-                        ml="5px" 
                         bg="#EDF2F7" 
                         border="none" 
                         color="litegrey.400" 
@@ -179,6 +178,7 @@ const AllRooms = (props) => {
                         border="none" 
                         color="litegrey.400" 
                     /> */}
+
                 </InputGroup>
                 <InitialFocus newf={newf} setRedirect={setRedirect}/>
             </Box>
@@ -242,7 +242,18 @@ const InitialFocus = (props) =>  {
   
     return (
       <>
-        <Button mt="20px" color="white" bg="liteblue" onClick={onOpen}>Create New Room</Button>
+        <Button 
+            mb={["20px", "20px", "0px", "0px", "0px"]} mt={["-10px", "-10px", "20px", "20px", "20px"]}
+            color="white" 
+            bg="liteblue" 
+            _hover={{ bg: "#81C8DC" }}
+            _active={{
+                bg: "#81C8DC",
+                transform: "scale(0.98)",
+                borderColor: "liteblue",
+            }}
+            onClick={onOpen}
+            >Create New Room</Button>
   
         <Modal
           initialFocusRef={initialRef}
@@ -261,8 +272,18 @@ const InitialFocus = (props) =>  {
             </ModalBody>
   
             <ModalFooter>
-              <Button onClick={submitHandler} bg="liteblues" color="liteblue" mr={3}>
-                Create
+              <Button 
+                onClick={submitHandler} 
+                _hover={{ bg: "#F1FCFF" }}
+                _active={{
+                    bg: "#F1FCFF",
+                    transform: "scale(0.98)",
+                    borderColor: "liteblue",
+                }}
+                bg="liteblues" 
+                color="liteblue" 
+                mr={3}
+                >Create
               </Button>
             </ModalFooter>
           </ModalContent>

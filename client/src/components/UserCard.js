@@ -45,10 +45,10 @@ const UserCard = (props) => {
                 padding="15px" 
                 mt={["0px", "0px", "30px", "30px", "30px"]}
                 mb="20px"
-                mr="50px"
+                pr={["20px", "20px", "20px", "20px", "20px"]}
                 ml="0"
                 bg="litegrey.20" 
-                width={["300px", "300px", "300px", "350px", "350px"]}
+                width="350px"
                 borderRadius="10px"
             >
                 <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
