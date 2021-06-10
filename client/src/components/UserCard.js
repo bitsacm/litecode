@@ -43,20 +43,21 @@ const UserCard = (props) => {
             <Flex 
                 flexDirection="row" 
                 padding="15px" 
-                mt={["0px", "0px", "30px", "30px", "30px"]}
-                mb="20px"
+                mb={["20px", "20px", "30px", "30px", "30px"]}
+                mr={["0px", "0px", "30px", "30px", "30px"]}
                 pr={["20px", "20px", "20px", "20px", "20px"]}
                 ml="0"
                 bg="litegrey.20" 
-                width="350px"
+                width={["300px", "300px", "350px", "350px", "350px"]}
                 borderRadius="10px"
             >
                 <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
                     <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
                         <Heading 
-                        fontSize={["20", "20px", "24px", "24px", "24px"]}
-                        color="litegrey.600">{props.name}</Heading>
+                        fontSize={["20px", "20px", "24px", "24px", "24px"]}
+                        color="litegrey.600" 
+                        >{props.name}</Heading>
                         {props.isAdmin ?
                          <Text
                             ml="20px"
@@ -64,7 +65,7 @@ const UserCard = (props) => {
                             color="white"
                             pr="5px"
                             pl="5px"
-                            fontSize={["14px", "14px", "18px", "18px", "18px"]}
+                            fontSize={["12px", "12px", "18px", "18px", "18px"]}
                             borderRadius="2px"
                             fontWeight="medium"
                          >ADMIN</Text> 

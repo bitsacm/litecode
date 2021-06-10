@@ -2,7 +2,22 @@ import React, { Fragment, useEffect, useState, useContext } from 'react'
 import AuthContext from '../store/auth.js'
 import { useHistory } from 'react-router-dom'
 import UserCard from '../components/UserCard.js'
-import { Flex, Box, Heading, Text, Button, Spinner } from '@chakra-ui/react'
+import { 
+    Flex, 
+    Box, 
+    Heading, 
+    Text, 
+    Button, 
+    ButtonGroup,
+    Spinner,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton, } from '@chakra-ui/react'
 import { DummyData } from '../resources/dummy.js'
 import { Redirect, Link } from 'react-router-dom'
 
@@ -137,68 +152,92 @@ const Room = () => {
 
         <Flex flexDir={["column", "column", "row", "row", "row"]}>
 
-            <Box display="flex" justifyContent="flex-start" width="70%">
-                <Flex margin="auto" justifyContent="flex-start" flexDirection="row" mt="30px" width="100%" flexWrap="wrap">
-                    {roomDetails.room.users.map((user, index)=>(
-                        <UserCard 
-                            name={user.userID.name}
-                            id={user.userID._id}
-                            imgUrl={user.userID.avatar}
-                            phoneNo={user.userID.phoneNo}
-                            loadRoom={loadRoom}
-                            isAdmin={user.userID._id===roomDetails.room.roomAdmin}
-                            userIsAdmin={(roomDetails.room.roomAdmin === userInfo.user._id)}
-                        />
-                    ))}
-                </Flex>
-            </Box>
-            <Box display="flex" flexDir="column" mt="40px" 
-            width={["70%", "70%", "30%", "30%", "30%"]}
+            <Flex 
+                margin="auto" 
+                justifyContent="flex-start" 
+                alignItems="start"
+                flexDirection="row" 
+                mt="30px" 
+                width={["100%", "100%", "70%", "70%", "70%"]}
+                flexWrap="wrap"
             >
-                <Box>
-                <Heading
-                    fontSize="20px"
-                    color="litegrey.400"
-                    fontWeight="medium"
-                >Room Name</Heading>
-                <Text
-                 fontSize="28px"
-                 color="litegrey.600"
-                 fontWeight="bold"
-                >{roomDetails.room.roomID}</Text>
+                {roomDetails.room.users.map((user, index)=>(
+                    <UserCard 
+                        name={user.userID.name}
+                        id={user.userID._id}
+                        imgUrl={user.userID.avatar}
+                        phoneNo={user.userID.phoneNo}
+                        loadRoom={loadRoom}
+                        isAdmin={user.userID._id===roomDetails.room.roomAdmin}
+                        userIsAdmin={(roomDetails.room.roomAdmin === userInfo.user._id)}
+                    />
+                ))}
+            </Flex>
+
+        <Box 
+            display="flex" 
+            flexDir="column" 
+            width={["100%", "100%", "30%", "30%", "30%"]} 
+            m="0" 
+            p="0"
+            ml={["10px", "30px", "0px", "0px", "0px"]}
+        >
+            <Box 
+                display="flex" 
+                flexDir={["row", "column", "column", "column", "column"]}
+                mt={["20px", "20px", "40px", "40px", "40px"]}
+                width="100%"
+                flexWrap="wrap"
+            >
+                <Box mb="20px" mr="60px">
+                    <Heading
+                        fontSize="20px"
+                        color="litegrey.400"
+                        fontWeight="medium"
+                    >Room Name</Heading>
+                    <Text
+                        fontSize="28px"
+                        color="litegrey.600"
+                        fontWeight="bold"
+                        >{roomDetails.room.roomID}</Text>
                 </Box>
 
-                <Box>
-                <Heading
-                mt="20px"
-                fontSize="20px"
-                color="litegrey.400"
-                fontWeight="medium">Members</Heading>
-                <Text
-                fontSize="28px"
-                fontWeight="bold"
-                color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
+                <Box mb="20px">
+                    <Heading
+                        fontSize="20px"
+                        color="litegrey.400"
+                        fontWeight="medium">Members</Heading>
+                    <Text
+                        fontSize="28px"
+                        fontWeight="bold"
+                        color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
                 </Box>
 
-                <Box>
-                <Heading
-                 mt="20px"
-                fontSize="20px"
-                color="litegrey.400"
-                fontWeight="medium">Per Member</Heading>
-                <Text
-                fontSize="28px"
-                color="litegrey.600"
-                fontWeight="bold"
-                >₹ {roomDetails.room.costPerMember}</Text>
+                <Box mb="20px" mr="60px">
+                    <Heading
+                        fontSize="20px"
+                        color="litegrey.400"
+                        fontWeight="medium">Per Member</Heading>
+                    <Text
+                        fontSize="28px"
+                        color="litegrey.600"
+                        fontWeight="bold"
+                        >₹ {roomDetails.room.costPerMember}</Text>
                 </Box>
-
+            </Box>
+            <Box 
+                display="flex" 
+                flexDir={["row", "column", "column", "column", "column"]}
+                width="100%"
+                flexWrap="wrap"
+            >
                 {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
                     <Fragment> {roomDetails.room.roomLocked ? 
                         <Button 
                             bg="liteblue" 
-                            width="150px" 
-                            mt="40px" 
+                            width={["120px", "150px", "150px", "150px", "150px"]}
+                            mt="20px" 
+                            mr="20px"
                             mb="-30px" 
                             color="white" 
                             onClick={lockRoom}
@@ -211,9 +250,9 @@ const Room = () => {
                         >Unlock Group</Button> : 
                         <Button 
                             bg="liteblue" 
-                            width="150px" 
-                            mt="40px" 
-                            mb="-30px" 
+                            width={["120px", "150px", "150px", "150px", "150px"]}
+                            mt="20px" 
+                            mr="20px"
                             color="white" 
                             onClick={lockRoom}
                             _hover={{ bg: "#81C8DC" }}
@@ -224,25 +263,70 @@ const Room = () => {
                             }}
                         >Lock Group</Button>}
                          </Fragment>: null}
-                    <Button 
-                        bg="#E53E3E" 
-                        width="150px" 
-                        mt="40px" 
-                        color="white" 
-                        onClick={leaveRoom}
-                        _hover={{ bg: "#EF7474" }}
-                        _active={{
-                            bg: "#EF7474",
-                            transform: "scale(0.98)",
-                            borderColor: "red",
-                        }}
-                    >Leave Group</Button>
+                    <ControlledUsage leaveRoom={leaveRoom} />
             </Box>
+        </Box>
             </Flex>
             </Fragment>:<Spinner />}
         </Fragment> : <Redirect to="/allrooms" />}
         </Fragment>
     )
 }
+
+
+const ControlledUsage = (props) => {
+    const [isOpen, setIsOpen] = React.useState(false)
+    const open = () => setIsOpen(!isOpen)
+    const close = () => setIsOpen(false)
+    return (
+      <>
+        <Button 
+            width={["120px", "150px", "150px", "150px", "150px"]}
+            mt="20px" 
+            onClick={open}
+            color="white" 
+            bg="#E53E3E" 
+            _hover={{ bg: "#EF7474" }}
+            _active={{
+                bg: "#EF7474",
+                transform: "scale(0.98)",
+                borderColor: "red",
+            }}
+        >Leave Group</Button>
+        <Popover
+          returnFocusOnClose={false}
+          isOpen={isOpen}
+          onClose={close}
+          placement="right"
+          closeOnBlur={false}
+        >
+          <PopoverContent>
+            <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverBody color="litegrey.400">
+              Are you sure you want to leave? You won't be able to join more rooms for 2 days.
+            </PopoverBody>
+            <PopoverFooter d="flex" justifyContent="flex-end">
+              <ButtonGroup size="sm">
+                <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
+                <Button 
+                    onClick={props.leaveRoom} 
+                    color="white" 
+                    bg="#E53E3E" 
+                    _hover={{ bg: "#EF7474" }}
+                    _active={{
+                        bg: "#EF7474",
+                        transform: "scale(0.98)",
+                        borderColor: "red",
+                    }}
+                >Leave</Button>
+              </ButtonGroup>
+            </PopoverFooter>
+          </PopoverContent>
+        </Popover>
+      </>
+    )
+  }
 
 export default Room;

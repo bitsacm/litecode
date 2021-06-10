@@ -157,7 +157,15 @@ const AllRooms = (props) => {
                     mb="70px"
                     border="none"
                 >
+
+                    <InputLeftElement
+                        ml="5px"
+                        pointerEvents="none"
+                        children={<SearchIcon color="litegrey.600" />}
+                    />
+
                     <Input 
+                        ml="5px"
                         bg="#EDF2F7" 
                         border="none" 
                         color="litegrey.400" 
@@ -180,7 +188,7 @@ const AllRooms = (props) => {
                     /> */}
 
                 </InputGroup>
-                <InitialFocus newf={newf} setRedirect={setRedirect}/>
+                <InitialFocus newf={newf} userInRoom={userInRoom} setRedirect={setRedirect}/>
             </Box>
             
             <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
@@ -253,6 +261,7 @@ const InitialFocus = (props) =>  {
                 borderColor: "liteblue",
             }}
             onClick={onOpen}
+            isDisabled={(props.userInRoom)}
             >Create New Room</Button>
   
         <Modal
