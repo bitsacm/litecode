@@ -25,9 +25,8 @@ function App() {
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
   const isLoggedIn = authCtx.isLoggedIn
-  const hasRoom=true;
 
-  const [mobile, setMobile] = useState(null);
+  const [mobile, setMobile] = useState("dummy");
 
 
   useEffect(() => {
@@ -54,9 +53,10 @@ function App() {
                 const phone = res.data.user.phoneNo
                 setMobile(phone)
               }
-            } else {
-                alert("ERROR POSTING CONTENT.");
-            }
+              else {
+                setMobile(null)
+              }
+          }
         }))
   }
 
@@ -65,62 +65,33 @@ function App() {
     <div>
       <Layout>
         <Switch>
-          {isLoggedIn ? <Fragment>
-           {mobile ?  <Fragment>
-             {hasRoom ?  <Fragment>
-
+          {isLoggedIn ? 
+            <Fragment>
               <Route path="/" exact>
-                <Redirect to="/allrooms" />
+                {mobile ? <Redirect to="/allrooms" /> : <AddMobile setMobile={setMobile}/>}
               </Route>
 
               <Route path="/room">
-                <Room />
+              {mobile ? <Room /> : <AddMobile setMobile={setMobile}/>}
               </Route>
 
               <Route path="/allrooms">
-                <AllRooms />
+                {mobile ? <AllRooms /> : <AddMobile setMobile={setMobile}/>}
               </Route>
 
-             </Fragment> :  <Fragment>
+            </Fragment> : 
+            
+            <Fragment>
+              <Route path="/" exact>
+                <Landing />
+              </Route>
 
-                <Route path="/" exact>
-                  <Redirect to="/allrooms" />
-                </Route>
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
 
-                <Route path="/room">
-                  <Redirect to="/allrooms" />
-                </Route>
-
-                <Route path="/allrooms">
-                  <AllRooms />
-                </Route>
-        
-               </Fragment>}
-           </Fragment> :  <Fragment>
-
-
-                <Route path="/" exact>
-                  <AddMobile setMobile={setMobile}/>
-                </Route>
-
-                <Route path="/room">
-                  <AddMobile setMobile={setMobile}/>
-                </Route>
-
-                <Route path="/allrooms">
-                  <AddMobile setMobile={setMobile}/>
-                </Route>
-           </Fragment> }
-          </Fragment> :  <Fragment>
-
-            <Route path="/" exact>
-              <Landing />
-            </Route>
-
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
-          </Fragment>}
+            </Fragment>
+          }
 
           <Route path="*">
             <Redirect to="/" />
