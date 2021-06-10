@@ -66,6 +66,7 @@ const Landing = () => {
             >
                 
                 <Heading
+                    pt={["80px", "80px", "0px", "0px", "0px"]} 
                     fontSize="44px"
                     color="litegrey.600"
                 >Share Leetcode</Heading>
@@ -98,7 +99,7 @@ const Landing = () => {
                     mt="20px" 
                     fontSize="24px" 
                     width="250px" 
-                    height="50px" 
+                    minHeight="50px" 
                     borderRadius="12px"
                     onClick={login}
                     _hover={{ bg: "#81C8DC" }}
@@ -111,8 +112,8 @@ const Landing = () => {
             </Flex>
 
             <Flex 
-            pt={["50px", "50px", "0px", "0px", "0px"]} 
-            width={["100%", "100%", "50%", "50%", "50%"]} 
+            width="50%"
+            display={["none", "none", "flex", "flex", "flex"]} 
             justifyContent="center" 
             alignItems="center">
                 <Image 

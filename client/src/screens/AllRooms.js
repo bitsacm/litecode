@@ -37,6 +37,7 @@ const AllRooms = (props) => {
     const [redirect, setRedirect] = useState(null);
     const [userInRoom, setUserInRoom] = useState(false);
     const [userRoom, setUserRoom] = useState(null);
+    const [isBanned, setIsBanned] = useState(false);
 
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
@@ -63,13 +64,11 @@ const AllRooms = (props) => {
                 })
             ).then(res => {
                 if(res.data) {
-                    if (res.data.user.inRoom) {
-                        // setUserInRoom(true)
-                        setUserRoom(res.data.user.roomID);
-                    }
-                    else {
-                        setUserRoom(null);
-                    }
+                    if (res.data.user.inRoom) setUserRoom(res.data.user.roomID);
+                    else setUserRoom(null);
+
+                    if (res.data.user.isBanned) setIsBanned(true)
+                    else setIsBanned(false)    
                 }
             }
         ))
@@ -190,14 +189,14 @@ const AllRooms = (props) => {
                     /> */}
 
                 </InputGroup>
-                <InitialFocus newf={newf} userRoom={userRoom} setRedirect={setRedirect}/>
+                <InitialFocus newf={newf} userRoom={userRoom} isBanned={isBanned} setRedirect={setRedirect}/>
             </Box>
             
             <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
                 {allRooms ? 
                 <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "flex-start"]} alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
-                        <RoomCard userRoom={userRoom} updateRedirect={updateRedirect} room={room} />
+                        <RoomCard userRoom={userRoom} updateRedirect={updateRedirect} isBanned={isBanned} room={room} />
                     ))}
                 </Flex>:null}
             </Box>
@@ -263,7 +262,7 @@ const InitialFocus = (props) =>  {
                 borderColor: "liteblue",
             }}
             onClick={onOpen}
-            isDisabled={(props.userRoom)}
+            isDisabled={(props.userRoom || props.isBanned)}
             >Create New Room</Button>
   
         <Modal

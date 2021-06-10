@@ -153,7 +153,7 @@ const RoomCard = (props) => {
                                 borderRadius="10" 
                                 mb="20px" 
                                 color="white" 
-                                isDisabled={(props.userRoom)}
+                                isDisabled={(props.userRoom || props.isBanned)}
                                 _hover={{ bg: "#81C8DC" }}
                                 _active={{
                                     bg: "#81C8DC",
@@ -183,6 +183,15 @@ const RoomCard = (props) => {
                                     >You're already in another room!</Text>
                                     }
                                 </Fragment> : null }
+                                {(props.isBanned) ? 
+                                    <Text 
+                                    fontSize="14px"
+                                    color="litegrey.400"
+                                    fontWeight="medium"
+                                    mt="-15px"
+                                    mb="25px"
+                                >You've been banned for 48 hours.</Text>
+                                : null}
                                 
                                 
                                 </Flex>

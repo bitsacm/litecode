@@ -60,6 +60,7 @@ const Room = () => {
                 } else {
                     updateRedirect()
                 }
+                if (redirect != null) alert("Please join a room.")
             }))
     }
 
