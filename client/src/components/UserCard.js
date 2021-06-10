@@ -48,7 +48,7 @@ const UserCard = (props) => {
                 pr={["20px", "20px", "20px", "20px", "20px"]}
                 ml="0"
                 bg="litegrey.20" 
-                width={["300px", "300px", "350px", "350px", "350px"]}
+                width={["300px", "350px", "380px", "380px", "380px"]}
                 borderRadius="10px"
             >
                 <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
@@ -60,7 +60,7 @@ const UserCard = (props) => {
                         >{props.name}</Heading>
                         {props.isAdmin ?
                          <Text
-                            ml="20px"
+                            ml="30px"
                             bg="litegrey.600"
                             color="white"
                             pr="5px"

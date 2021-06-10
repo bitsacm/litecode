@@ -245,7 +245,7 @@ const Room = () => {
                         <Button 
                             bg="liteblue" 
                             width={["120px", "150px", "150px", "150px", "150px"]}
-                            mt="20px" 
+                            mb="20px" 
                             mr="20px"
                             color="white" 
                             onClick={lockRoom}
@@ -259,8 +259,8 @@ const Room = () => {
                         <Button 
                             bg="liteblue" 
                             width={["120px", "150px", "150px", "150px", "150px"]}
-                            mt="20px" 
                             mr="20px"
+                            mb="20px" 
                             color="white" 
                             onClick={lockRoom}
                             _hover={{ bg: "#81C8DC" }}
@@ -290,7 +290,7 @@ const ControlledUsage = (props) => {
       <>
         <Button 
             width={["120px", "150px", "150px", "150px", "150px"]}
-            mt="20px" 
+            mt="0px" 
             onClick={open}
             color="white" 
             bg="#E53E3E" 
