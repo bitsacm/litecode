@@ -143,12 +143,21 @@ const Room = () => {
         <Fragment>
             {roomDetails ? 
             <Fragment>
+            {roomDetails.room.users.length===1 ?
+            <Heading 
+                marginLeft="10px" 
+                marginTop="40px"
+                fontSize="32px"
+                color="litegrey.600"
+            >🥺 It's lonely here. Invite your friends!</Heading> :
             <Heading 
                 marginLeft="10px" 
                 marginTop="40px"
                 fontSize="32px"
                 color="litegrey.600"
             >👏 It's a party!</Heading>
+            }
+
 
         <Flex flexDir={["column", "column", "row", "row", "row"]}>
 
@@ -238,7 +247,6 @@ const Room = () => {
                             width={["120px", "150px", "150px", "150px", "150px"]}
                             mt="20px" 
                             mr="20px"
-                            mb="-30px" 
                             color="white" 
                             onClick={lockRoom}
                             _hover={{ bg: "#81C8DC" }}
