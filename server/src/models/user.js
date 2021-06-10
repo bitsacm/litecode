@@ -33,6 +33,14 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    isBanned:{
+        type: Boolean,
+        default: false
+    },
+    banTime:{
+        type: Number,
+        default: Date.now
+    },
     roomID: {
         type: String,
         required: true,

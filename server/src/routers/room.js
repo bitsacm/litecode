@@ -3,12 +3,13 @@ const router = new express.Router()
 const Room = require('../models/room')
 const crypto = require("crypto")
 const auth = require('../middleware/auth')
+const banStatus = require('../middleware/banStatus')
 
 // @desc    Create New Room
 // @access  Private
 // query params -> /createRoom?roomName=randomGroup123
 // if no query, random 6 character hex string
-router.post('/createRoom', auth, async (req, res) => {
+router.post('/createRoom', auth, banStatus, async (req, res) => {
     const query = req.query.roomName
     const room = new Room({
         users: []
@@ -70,6 +71,13 @@ router.post('/createRoom', auth, async (req, res) => {
 // @access  Private
 router.get('/rooms', auth, async (req, res) => {
     try {
+        if (req.user.isBanned) {
+            const timeElapsed = Date.now() - req.user.banTime
+            if (timeElapsed > 2 * 24 * 3600 * 1000) {
+                req.user.isBanned = false
+            }
+            await req.user.save()
+        }
         await Room.deleteMany({ usersInRoom: 0 })
         const rooms = await Room.find({ roomFull: false, roomLocked: false }).sort({ usersInRoom: "desc" }).populate('users.userID')
         res.status(200).json(rooms)
@@ -88,7 +96,7 @@ router.get('/searchRoom', auth, async (req, res) => {
             const rooms = await Room.find({ roomFull: false, roomLocked: false, roomID: new RegExp(query, 'i') }).sort({ usersInRoom: "desc" }).populate('users.userID')
             res.status(200).json(rooms)
         }
-        else{
+        else {
             res.redirect('/rooms')
         }
     } catch (err) {
@@ -111,7 +119,7 @@ router.get('/room/:id', auth, async (req, res) => {
 
 // @desc    Join Room using roomID
 // @access  Private
-router.post('/joinRoom/:id', auth, async (req, res) => {
+router.post('/joinRoom/:id', auth, banStatus, async (req, res) => {
     try {
         if (req.user.inRoom) {
             return res.status(400).json({ error: 'You are already in a Room' })
@@ -176,6 +184,13 @@ router.post('/leaveRoom', auth, async (req, res) => {
             else {
                 room.roomAdmin = null
             }
+        }
+
+        console.log(room.usersInRoom)
+
+        if (room.usersInRoom) {
+            req.user.isBanned = true
+            req.user.banTime = Date.now()
         }
 
         await req.user.save()
