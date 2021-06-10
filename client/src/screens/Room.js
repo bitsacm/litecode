@@ -240,38 +240,43 @@ const Room = () => {
                 width="100%"
                 flexWrap="wrap"
             >
-                {(roomDetails.room.roomAdmin === userInfo.user._id) ? 
-                    <Fragment> {roomDetails.room.roomLocked ? 
-                        <Button 
-                            bg="liteblue" 
-                            width={["120px", "150px", "150px", "150px", "150px"]}
-                            mb="20px" 
-                            mr="20px"
-                            color="white" 
-                            onClick={lockRoom}
-                            _hover={{ bg: "#81C8DC" }}
-                            _active={{
-                                bg: "#81C8DC",
-                                transform: "scale(0.98)",
-                                borderColor: "liteblue",
-                            }}
-                        >Unlock Group</Button> : 
-                        <Button 
-                            bg="liteblue" 
-                            width={["120px", "150px", "150px", "150px", "150px"]}
-                            mr="20px"
-                            mb="20px" 
-                            color="white" 
-                            onClick={lockRoom}
-                            _hover={{ bg: "#81C8DC" }}
-                            _active={{
-                                bg: "#81C8DC",
-                                transform: "scale(0.98)",
-                                borderColor: "liteblue",
-                            }}
-                        >Lock Group</Button>}
-                         </Fragment>: null}
-                    <ControlledUsage leaveRoom={leaveRoom} />
+                {(roomDetails.room.roomAdmin === userInfo.user._id) 
+                ? 
+                    <Fragment> 
+                        {roomDetails.room.roomLocked ? 
+                            <Button 
+                                bg="liteblue" 
+                                width={["120px", "150px", "150px", "150px", "150px"]}
+                                mb="20px" 
+                                mr="20px"
+                                color="white" 
+                                onClick={lockRoom}
+                                _hover={{ bg: "#81C8DC" }}
+                                _active={{
+                                    bg: "#81C8DC",
+                                    transform: "scale(0.98)",
+                                    borderColor: "liteblue",
+                                }}
+                            >Unlock Group</Button> 
+                        : 
+                            <Button 
+                                bg="liteblue" 
+                                width={["120px", "150px", "150px", "150px", "150px"]}
+                                mr="20px"
+                                mb="20px" 
+                                color="white" 
+                                onClick={lockRoom}
+                                _hover={{ bg: "#81C8DC" }}
+                                _active={{
+                                    bg: "#81C8DC",
+                                    transform: "scale(0.98)",
+                                    borderColor: "liteblue",
+                                }}
+                            >Lock Group</Button>
+                        }
+                        </Fragment>
+                :   null}
+                    <ControlledUsage count={roomDetails.room.users.length} leaveRoom={leaveRoom} />
             </Box>
         </Box>
             </Flex>
@@ -288,51 +293,71 @@ const ControlledUsage = (props) => {
     const close = () => setIsOpen(false)
     return (
       <>
-        <Button 
-            width={["120px", "150px", "150px", "150px", "150px"]}
-            mt="0px" 
-            onClick={open}
-            color="white" 
-            bg="#E53E3E" 
-            _hover={{ bg: "#EF7474" }}
-            _active={{
-                bg: "#EF7474",
-                transform: "scale(0.98)",
-                borderColor: "red",
-            }}
-        >Leave Group</Button>
-        <Popover
-          returnFocusOnClose={false}
-          isOpen={isOpen}
-          onClose={close}
-          placement="right"
-          closeOnBlur={false}
-        >
-          <PopoverContent>
-            <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverBody color="litegrey.400">
-              Are you sure you want to leave? You won't be able to join more rooms for 2 days.
-            </PopoverBody>
-            <PopoverFooter d="flex" justifyContent="flex-end">
-              <ButtonGroup size="sm">
-                <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
-                <Button 
-                    onClick={props.leaveRoom} 
-                    color="white" 
-                    bg="#E53E3E" 
-                    _hover={{ bg: "#EF7474" }}
-                    _active={{
-                        bg: "#EF7474",
-                        transform: "scale(0.98)",
-                        borderColor: "red",
-                    }}
-                >Leave</Button>
-              </ButtonGroup>
-            </PopoverFooter>
-          </PopoverContent>
-        </Popover>
+        { props.count > 1 ? 
+        <Fragment>
+            <Button 
+                width={["120px", "150px", "150px", "150px", "150px"]}
+                mt="0px" 
+                onClick={open}
+                color="white" 
+                bg="#E53E3E" 
+                _hover={{ bg: "#EF7474" }}
+                _active={{
+                    bg: "#EF7474",
+                    transform: "scale(0.98)",
+                    borderColor: "red",
+                }}
+            >Leave Group</Button>
+            <Popover
+            returnFocusOnClose={false}
+            isOpen={isOpen}
+            onClose={close}
+            placement="right"
+            closeOnBlur={false}
+            >
+            <PopoverContent>
+                <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody color="litegrey.400">
+                Are you sure you want to leave? You won't be able to join more rooms for 2 days.
+                </PopoverBody>
+                <PopoverFooter d="flex" justifyContent="flex-end">
+                <ButtonGroup size="sm">
+                    <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
+                    <Button 
+                        onClick={props.leaveRoom} 
+                        color="white" 
+                        bg="#E53E3E" 
+                        _hover={{ bg: "#EF7474" }}
+                        _active={{
+                            bg: "#EF7474",
+                            transform: "scale(0.98)",
+                            borderColor: "red",
+                        }}
+                    >Leave</Button>
+                </ButtonGroup>
+                </PopoverFooter>
+            </PopoverContent>
+            </Popover>
+        </Fragment>
+        : 
+        <Fragment>
+            <Button 
+                width={["120px", "150px", "150px", "150px", "150px"]}
+                mt="0px" 
+                onClick={props.leaveRoom}
+                color="white" 
+                bg="#E53E3E" 
+                _hover={{ bg: "#EF7474" }}
+                _active={{
+                    bg: "#EF7474",
+                    transform: "scale(0.98)",
+                    borderColor: "red",
+                }}
+            >Leave Group</Button>
+        </Fragment>
+        }
       </>
     )
   }

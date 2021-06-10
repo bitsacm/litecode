@@ -36,6 +36,7 @@ const AllRooms = (props) => {
     const [newf, setNewf] = useState(null);
     const [redirect, setRedirect] = useState(null);
     const [userInRoom, setUserInRoom] = useState(false);
+    const [userRoom, setUserRoom] = useState(null);
 
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
@@ -63,10 +64,11 @@ const AllRooms = (props) => {
             ).then(res => {
                 if(res.data) {
                     if (res.data.user.inRoom) {
-                        setUserInRoom(true)
+                        // setUserInRoom(true)
+                        setUserRoom(res.data.user.roomID);
                     }
                     else {
-                        setUserInRoom(false)
+                        setUserRoom(null);
                     }
                 }
             }
@@ -188,14 +190,14 @@ const AllRooms = (props) => {
                     /> */}
 
                 </InputGroup>
-                <InitialFocus newf={newf} userInRoom={userInRoom} setRedirect={setRedirect}/>
+                <InitialFocus newf={newf} userRoom={userRoom} setRedirect={setRedirect}/>
             </Box>
             
             <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
                 {allRooms ? 
                 <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "flex-start"]} alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
-                        <RoomCard userInRoom={userInRoom} updateRedirect={updateRedirect} room={room} />
+                        <RoomCard userRoom={userRoom} updateRedirect={updateRedirect} room={room} />
                     ))}
                 </Flex>:null}
             </Box>
@@ -261,7 +263,7 @@ const InitialFocus = (props) =>  {
                 borderColor: "liteblue",
             }}
             onClick={onOpen}
-            isDisabled={(props.userInRoom)}
+            isDisabled={(props.userRoom)}
             >Create New Room</Button>
   
         <Modal

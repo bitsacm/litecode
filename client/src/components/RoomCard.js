@@ -153,7 +153,7 @@ const RoomCard = (props) => {
                                 borderRadius="10" 
                                 mb="20px" 
                                 color="white" 
-                                isDisabled={(props.userInRoom)}
+                                isDisabled={(props.userRoom)}
                                 _hover={{ bg: "#81C8DC" }}
                                 _active={{
                                     bg: "#81C8DC",
@@ -163,15 +163,27 @@ const RoomCard = (props) => {
                                 onClick={joinRoom}>
                                     Join Group
                                     </Button>
-                                {(props.userInRoom) ? 
-                                <Text 
-                                    fontSize="18px"
-                                    color="litegrey.400"
-                                    fontWeight="medium"
-                                    mt="-10px"
-                                    mb="25px"
-                                >You're already in a room!</Text> :
-                                null }
+                                {(props.userRoom) ? 
+                                <Fragment>
+                                    {props.userRoom === props.room.roomID ? 
+                                    <Text 
+                                        fontSize="14px"
+                                        color="litegrey.400"
+                                        fontWeight="medium"
+                                        mt="-15px"
+                                        mb="25px"
+                                    >You're already in this room!</Text>
+                                    :
+                                    <Text 
+                                        fontSize="14px"
+                                        color="litegrey.400"
+                                        fontWeight="medium"
+                                        mt="-15px"
+                                        mb="25px"
+                                    >You're already in another room!</Text>
+                                    }
+                                </Fragment> : null }
+                                
                                 
                                 </Flex>
                             </Flex>
