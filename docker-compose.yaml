@@ -10,7 +10,7 @@ services:
     depends_on: 
       - db
     ports: 
-      - 3004:3000
+      - 3000:3000
     expose: 
       - 3000
     volumes: 
@@ -21,7 +21,7 @@ services:
     build: ./client
     env_file: ./client/config.env
     ports: 
-        - 3000:3000
+        - 3001:3000
     expose: 
         - 3000  
     volumes: 
