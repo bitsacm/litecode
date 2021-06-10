@@ -268,6 +268,7 @@ const InitialFocus = (props) =>  {
           initialFocusRef={initialRef}
           isOpen={isOpen}
           onClose={onClose}
+          size="md"
         >
           <ModalOverlay />
           <ModalContent>
