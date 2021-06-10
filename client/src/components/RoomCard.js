@@ -108,7 +108,7 @@ const RoomCard = (props) => {
                     }}
                 >Join</Button>
 
-                <Modal margin="100px" isOpen={isOpen} size="xl" onClose={onClose}>
+                <Modal isOpen={isOpen} size="xl" onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader
