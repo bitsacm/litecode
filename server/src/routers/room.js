@@ -186,8 +186,6 @@ router.post('/leaveRoom', auth, async (req, res) => {
             }
         }
 
-        console.log(room.usersInRoom)
-
         if (room.usersInRoom) {
             req.user.isBanned = true
             req.user.banTime = Date.now()

@@ -28,7 +28,6 @@ const getAccessTokenFromCode = async (code) => {
         oauth2Client.setCredentials(tokens)
         return tokens
     } catch (e) {
-        console.log(e)
         throw new Error('Unable to fetch access token.')
     }
 }
@@ -38,7 +37,6 @@ const getUserData = async (access_token) => {
         url: 'https://www.googleapis.com/oauth2/v2/userinfo',
         method: 'get',
         headers: {
-            // eslint-disable-next-line camelcase
             Authorization: `Bearer ${access_token}`
         }
     })

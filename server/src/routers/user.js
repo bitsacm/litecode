@@ -40,7 +40,6 @@ router.delete('/users/me', auth, async (req, res) => {
         await req.user.remove()
         res.json({ msg: 'User deleted successfully' })
     } catch (err) {
-        console.log(err)
         res.status(400).json({ error: `${err}` })
     }
 })
