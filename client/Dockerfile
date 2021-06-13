@@ -13,4 +13,4 @@ RUN npm install --slient
 
 COPY . ./
 
-CMD yarn build
+CMD npm run build

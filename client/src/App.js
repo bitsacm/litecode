@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   const getMobile = () => {
-    fetch('http://localhost:3000/users/me',
+    fetch('http://localhost:1337/server/users/me',
             {   
                 method: 'GET',
                 headers: {
@@ -115,7 +115,7 @@ const AddMobile = (props) => {
         e.preventDefault();
 
         if (refMobile.length === 10 && !(isNaN(refMobile))) {
-            fetch('http://localhost:3000/users/me',
+            fetch('http://localhost:1337/server/users/me',
                 {
                     method: 'PATCH',
                     headers: {
