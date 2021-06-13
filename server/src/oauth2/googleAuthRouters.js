@@ -5,7 +5,7 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 
 router.get('/auth/google', async (req, res) => {
-  res.json({googleLoginUrl})
+  res.json({ googleLoginUrl })
 })
 
 router.get('/auth/google/redirect', async (req, res) => {
@@ -15,12 +15,22 @@ router.get('/auth/google/redirect', async (req, res) => {
 
   const data = await getUserData(access_token)
 
+  // if(!data.email.endsWith(".bits-pilani.ac.in")){
+  //   return res.status(400).json({err: `Email ID is not associated with BITS`})
+  // }
+
   const user = await User.findOne({ email: data.email })
 
   if (!user) {
+    const split = data.name.split(' ')
+    var str = ""
+    for (var i = 0; i < split.length; i++) {
+      str = str + split[i].charAt(0).toUpperCase() + split[i].substring(1).toLowerCase() + ' '
+    }
+
     const user = new User({
       email: data.email,
-      name: data.name,
+      name: str,
       avatar: data.picture
     })
 
