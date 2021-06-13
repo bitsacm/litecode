@@ -28,7 +28,7 @@ const Landing = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     const login = () => {
-        fetch('http://localhost:1337/server/auth/google/',
+        fetch('https://litecode.bitsacm.in/server/auth/google/',
                 {   
                     method: 'GET',
                     headers: {

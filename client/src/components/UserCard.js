@@ -15,7 +15,7 @@ const UserCard = (props) => {
     const token = authCtx.token;
 
     const deleteUser = () => {
-        fetch('http://localhost:1337/server/remove/'+props.id,
+        fetch('https://litecode.bitsacm.in/server/remove/'+props.id,
                 {   
                     method: 'PATCH',
                     headers: {
