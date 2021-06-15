@@ -49,7 +49,7 @@ const AllRooms = (props) => {
     }, [redirect])
 
     const myDeets = () =>{
-        fetch('https://litecode.bitsacm.in/server/users/me',
+        fetch('http://localhost:3000/users/me',
                 {   
                     method: 'GET',
                     headers: {
@@ -76,7 +76,7 @@ const AllRooms = (props) => {
 
 
     const getRooms = () => {
-        fetch('https://litecode.bitsacm.in/server/rooms/',
+        fetch('http://localhost:3000/rooms/',
                 {   
                     method: 'GET',
                     headers: {
@@ -105,7 +105,7 @@ const AllRooms = (props) => {
     const submitFunction = () => {
         const search = searchRef.current.value;
 
-        fetch('https://litecode.bitsacm.in/server/searchRoom/?roomName='+search,
+        fetch('http://localhost:3000/searchRoom/?roomName='+search,
             {   
                 method: 'GET',
                 headers: {
@@ -224,7 +224,7 @@ const InitialFocus = (props) =>  {
 
         const name = nameRef.current.value;
 
-        fetch('https://litecode.bitsacm.in/server/createRoom?roomName='+name,
+        fetch('http://localhost:3000/createRoom?roomName='+name,
                 {
                     method: 'POST',
                     headers: {
