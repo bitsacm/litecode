@@ -194,12 +194,12 @@ const Room = () => {
         >
             <Box 
                 display="flex" 
-                flexDir={["row", "column", "column", "column", "column"]}
+                flexDir={["column", "column", "column", "column", "column"]}
                 mt={["20px", "20px", "40px", "40px", "40px"]}
                 width="100%"
                 flexWrap="wrap"
             >
-                <Box mb="20px" mr="60px">
+                <Box mb="20px">
                     <Heading
                         fontSize="20px"
                         color="litegrey.400"
@@ -212,27 +212,32 @@ const Room = () => {
                         >{roomDetails.room.roomID}</Text>
                 </Box>
 
-                <Box mb="20px">
-                    <Heading
-                        fontSize="20px"
-                        color="litegrey.400"
-                        fontWeight="medium">Members</Heading>
-                    <Text
-                        fontSize="28px"
-                        fontWeight="bold"
-                        color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
-                </Box>
+                <Box 
+                    display="flex" 
+                    flexDir={["row", "column", "column", "column", "column"]}
+                >
+                    <Box mb="20px" mr="40px">
+                        <Heading
+                            fontSize="20px"
+                            color="litegrey.400"
+                            fontWeight="medium">Members</Heading>
+                        <Text
+                            fontSize="28px"
+                            fontWeight="bold"
+                            color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
+                    </Box>
 
-                <Box mb="20px" mr="60px">
-                    <Heading
-                        fontSize="20px"
-                        color="litegrey.400"
-                        fontWeight="medium">Per Member</Heading>
-                    <Text
-                        fontSize="28px"
-                        color="litegrey.600"
-                        fontWeight="bold"
-                        >₹ {roomDetails.room.costPerMember}</Text>
+                    <Box mb="20px">
+                        <Heading
+                            fontSize="20px"
+                            color="litegrey.400"
+                            fontWeight="medium">Per Member</Heading>
+                        <Text
+                            fontSize="28px"
+                            color="litegrey.600"
+                            fontWeight="bold"
+                            >₹ {roomDetails.room.costPerMember}</Text>
+                    </Box>
                 </Box>
             </Box>
             <Box 

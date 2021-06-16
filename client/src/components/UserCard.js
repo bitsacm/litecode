@@ -37,6 +37,12 @@ const UserCard = (props) => {
                 }
             }))
     }
+
+    const cleanName = (str) => {
+        return str.split(' ')
+            .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
+            .join(' ')
+    }
    
     return(
         <Fragment>
@@ -48,19 +54,20 @@ const UserCard = (props) => {
                 pr={["20px", "20px", "20px", "20px", "20px"]}
                 ml="0"
                 bg="litegrey.20" 
-                width={["300px", "350px", "380px", "380px", "380px"]}
+                width={["300px", "350px", "400px", "400px", "400px"]}
                 borderRadius="10px"
             >
                 <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
-                    <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
+                    <Flex flexDirection="row" maxWidth={["180px", "250px", "300px", "300px", "300px"]} justifyContent="space-between" alignItems="center">
                         <Heading 
                         fontSize={["20px", "20px", "24px", "24px", "24px"]}
                         color="litegrey.600" 
-                        >{props.name}</Heading>
+                        isTruncated
+                        >{cleanName(props.name)}</Heading>
                         {props.isAdmin ?
                          <Text
-                            ml="30px"
+                            ml={["25px", "30px", "40px", "40px", "45px"]}
                             bg="litegrey.600"
                             color="white"
                             pr="5px"

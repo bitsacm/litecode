@@ -151,7 +151,7 @@ const AllRooms = (props) => {
             
             <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%">
                 <InputGroup 
-                    width={["300px", "80%", "40%", "40%", "40%"]}
+                    width={["100%", "400px", "40%", "40%", "40%"]}
                     height="0px"                
                     m="20px"    
                     mt="50px"
