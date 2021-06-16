@@ -49,7 +49,7 @@ const AllRooms = (props) => {
     }, [redirect])
 
     const myDeets = () =>{
-        fetch('https://litecode.bitsacm.in/server/users/me',
+        fetch('http://localhost:3000/users/me',
                 {   
                     method: 'GET',
                     headers: {
@@ -76,7 +76,7 @@ const AllRooms = (props) => {
 
 
     const getRooms = () => {
-        fetch('https://litecode.bitsacm.in/server/rooms/',
+        fetch('http://localhost:3000/rooms/',
                 {   
                     method: 'GET',
                     headers: {
@@ -105,7 +105,7 @@ const AllRooms = (props) => {
     const submitFunction = () => {
         const search = searchRef.current.value;
 
-        fetch('https://litecode.bitsacm.in/server/searchRoom/?roomName='+search,
+        fetch('http://localhost:3000/searchRoom/?roomName='+search,
             {   
                 method: 'GET',
                 headers: {
@@ -151,7 +151,7 @@ const AllRooms = (props) => {
             
             <Box margin="auto" display="flex" flexDirection={["column", "column", "row", "row", "row"]} justifyContent="center" alignItems="center"  width="100%">
                 <InputGroup 
-                    width={["300px", "80%", "40%", "40%", "40%"]}
+                    width={["100%", "400px", "40%", "40%", "40%"]}
                     height="0px"                
                     m="20px"    
                     mt="50px"
@@ -224,7 +224,7 @@ const InitialFocus = (props) =>  {
 
         const name = nameRef.current.value;
 
-        fetch('https://litecode.bitsacm.in/server/createRoom?roomName='+name,
+        fetch('http://localhost:3000/createRoom?roomName='+name,
                 {
                     method: 'POST',
                     headers: {

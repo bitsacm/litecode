@@ -38,7 +38,7 @@ const Room = () => {
 
 
     const loadRoom = () => {
-        fetch('https://litecode.bitsacm.in/server/users/me',
+        fetch('http://localhost:3000/users/me',
                 {   
                     method: 'GET',
                     headers: {
@@ -65,7 +65,7 @@ const Room = () => {
     }
 
     const getRoomDetails = (roomID) => {
-        fetch('https://litecode.bitsacm.in/server/room/'+roomID,
+        fetch('http://localhost:3000/room/'+roomID,
                 {   
                     method: 'GET',
                     headers: {
@@ -88,7 +88,7 @@ const Room = () => {
     }
 
     const lockRoom = () => {
-        fetch('https://litecode.bitsacm.in/server/lock',
+        fetch('http://localhost:3000/lock',
                 {   
                     method: 'PATCH',
                     headers: {
@@ -111,7 +111,7 @@ const Room = () => {
     }
 
     const leaveRoom = () => {
-        fetch('https://litecode.bitsacm.in/server/leaveRoom',
+        fetch('http://localhost:3000/leaveRoom',
                 {   
                     method: 'POST',
                     headers: {
@@ -194,12 +194,12 @@ const Room = () => {
         >
             <Box 
                 display="flex" 
-                flexDir={["row", "column", "column", "column", "column"]}
+                flexDir={["column", "column", "column", "column", "column"]}
                 mt={["20px", "20px", "40px", "40px", "40px"]}
                 width="100%"
                 flexWrap="wrap"
             >
-                <Box mb="20px" mr="60px">
+                <Box mb="20px">
                     <Heading
                         fontSize="20px"
                         color="litegrey.400"
@@ -212,27 +212,32 @@ const Room = () => {
                         >{roomDetails.room.roomID}</Text>
                 </Box>
 
-                <Box mb="20px">
-                    <Heading
-                        fontSize="20px"
-                        color="litegrey.400"
-                        fontWeight="medium">Members</Heading>
-                    <Text
-                        fontSize="28px"
-                        fontWeight="bold"
-                        color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
-                </Box>
+                <Box 
+                    display="flex" 
+                    flexDir={["row", "column", "column", "column", "column"]}
+                >
+                    <Box mb="20px" mr="40px">
+                        <Heading
+                            fontSize="20px"
+                            color="litegrey.400"
+                            fontWeight="medium">Members</Heading>
+                        <Text
+                            fontSize="28px"
+                            fontWeight="bold"
+                            color="litegrey.600">{roomDetails.room.users.length} / 4</Text>
+                    </Box>
 
-                <Box mb="20px" mr="60px">
-                    <Heading
-                        fontSize="20px"
-                        color="litegrey.400"
-                        fontWeight="medium">Per Member</Heading>
-                    <Text
-                        fontSize="28px"
-                        color="litegrey.600"
-                        fontWeight="bold"
-                        >₹ {roomDetails.room.costPerMember}</Text>
+                    <Box mb="20px">
+                        <Heading
+                            fontSize="20px"
+                            color="litegrey.400"
+                            fontWeight="medium">Per Member</Heading>
+                        <Text
+                            fontSize="28px"
+                            color="litegrey.600"
+                            fontWeight="bold"
+                            >₹ {roomDetails.room.costPerMember}</Text>
+                    </Box>
                 </Box>
             </Box>
             <Box 
@@ -248,7 +253,7 @@ const Room = () => {
                             <Button 
                                 bg="liteblue" 
                                 width={["120px", "150px", "150px", "150px", "150px"]}
-                                mb="20px" 
+                                mb="10px" 
                                 mr="20px"
                                 color="white" 
                                 onClick={lockRoom}
@@ -264,7 +269,7 @@ const Room = () => {
                                 bg="liteblue" 
                                 width={["120px", "150px", "150px", "150px", "150px"]}
                                 mr="20px"
-                                mb="20px" 
+                                mb="10px" 
                                 color="white" 
                                 onClick={lockRoom}
                                 _hover={{ bg: "#81C8DC" }}

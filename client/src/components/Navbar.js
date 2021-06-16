@@ -98,7 +98,7 @@ const Navbar = () => {
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
                         fontWeight="medium"
-                        marginRight={["10px", "10px", "25px", "25px", "25px"]}
+                        marginRight={["10px", "10px", "30px", "30px", "30px"]}
                     >My Room</Text>
                 </NavLink>:null}
 
