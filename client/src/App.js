@@ -137,7 +137,7 @@ const AddMobile = (props) => {
                 if(res.data){
                     props.setMobile(refMobile)
                 } else {
-                    alert("Please try again.");
+                    alert("An account with this number already exists. Please try again.");
                 }
             }))
         }
@@ -170,7 +170,7 @@ const AddMobile = (props) => {
                                 type="tel" 
                                 fontWeight="medium" 
                                 placeholder="phone number"
-                                isInvalid={!(refMobile.length === 10) || isNaN(refMobile)} 
+                                isInvalid={!(refMobile.length === 10) || isNaN(refMobile) && refMobile.length != 0} 
                                 errorBorderColor="red.300"
                                 borderColor="liteblue"
                                 onChange={handleChange}

@@ -253,7 +253,7 @@ const Room = () => {
                             <Button 
                                 bg="liteblue" 
                                 width={["120px", "150px", "150px", "150px", "150px"]}
-                                mb="20px" 
+                                mb="10px" 
                                 mr="20px"
                                 color="white" 
                                 onClick={lockRoom}
@@ -269,7 +269,7 @@ const Room = () => {
                                 bg="liteblue" 
                                 width={["120px", "150px", "150px", "150px", "150px"]}
                                 mr="20px"
-                                mb="20px" 
+                                mb="10px" 
                                 color="white" 
                                 onClick={lockRoom}
                                 _hover={{ bg: "#81C8DC" }}
