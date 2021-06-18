@@ -39,7 +39,7 @@ const Navbar = () => {
     }
 
     // const doesHaveRoom = () => {
-    //     fetch('http://localhost:3000/users/me',
+    //     fetch('https://litecode.bitsacm.in/server/users/me',
     //             {   
     //                 method: 'GET',
     //                 headers: {

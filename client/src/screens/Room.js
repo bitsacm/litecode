@@ -38,7 +38,7 @@ const Room = () => {
 
 
     const loadRoom = () => {
-        fetch('http://localhost:3000/users/me',
+        fetch('https://litecode.bitsacm.in/server/users/me',
                 {   
                     method: 'GET',
                     headers: {
@@ -65,7 +65,7 @@ const Room = () => {
     }
 
     const getRoomDetails = (roomID) => {
-        fetch('http://localhost:3000/room/'+roomID,
+        fetch('https://litecode.bitsacm.in/server/room/'+roomID,
                 {   
                     method: 'GET',
                     headers: {
@@ -88,7 +88,7 @@ const Room = () => {
     }
 
     const lockRoom = () => {
-        fetch('http://localhost:3000/lock',
+        fetch('https://litecode.bitsacm.in/server/lock',
                 {   
                     method: 'PATCH',
                     headers: {
@@ -111,7 +111,7 @@ const Room = () => {
     }
 
     const leaveRoom = () => {
-        fetch('http://localhost:3000/leaveRoom',
+        fetch('https://litecode.bitsacm.in/server/leaveRoom',
                 {   
                     method: 'POST',
                     headers: {
