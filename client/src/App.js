@@ -27,10 +27,12 @@ function App() {
   const isLoggedIn = authCtx.isLoggedIn
 
   const [mobile, setMobile] = useState("dummy");
+  const [inRoom, setInRoom] = useState("dummy");
 
 
   useEffect(() => {
     getMobile();
+    getRoom();
   }, [])
 
   const getMobile = () => {
@@ -60,6 +62,37 @@ function App() {
         }))
   }
 
+  const getRoom = () => {
+    fetch('http://localhost:3000/users/me',
+            {   
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token,
+                }
+            }
+        ).then(response => 
+            response.json().then(data => ({
+                data: data,
+                status: response.status
+            })
+        ).then(res => {
+            if(res.data){
+              if (res.data.user.inRoom) {
+                const smth = "yes"
+                setInRoom(smth)
+              }
+              else {
+                setInRoom(null)
+              }
+              console.log(inRoom)
+          }
+        }))
+  }
+  
+
+
+
 
   return (
     <div>
@@ -68,7 +101,9 @@ function App() {
           {isLoggedIn ? 
             <Fragment>
               <Route path="/" exact>
-                {mobile ? <Redirect to="/allrooms" /> : <AddMobile setMobile={setMobile}/>}
+                {mobile ? <Fragment>
+                  {inRoom ? <Redirect to="/room" /> : <Redirect to="/allrooms" />}
+                </Fragment> : <AddMobile setMobile={setMobile}/>}
               </Route>
 
               <Route path="/room">

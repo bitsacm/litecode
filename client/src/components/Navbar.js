@@ -16,7 +16,7 @@ import imgurl from '../resources/img/keyboard.png'
 import acmlogo from '../resources/img/acmlogo.png'
 import logoutpng from '../resources/img/logout.png'
 
-import '../index.css'
+import './Nav.css'
 
 const Navbar = () => {
     const authCtx = useContext(AuthContext);
@@ -25,43 +25,9 @@ const Navbar = () => {
 
     const [hasRoom, setHasRoom] = useState(true);
 
-    // useEffect(()=>{
-    //     doesHaveRoom()
-    // })
-
-    // const logout = () => {
-    //     authCtx.logout()
-    //     window.location.reload();
-    // }
-
     const login = () => {
         authCtx.login()
     }
-
-    // const doesHaveRoom = () => {
-    //     fetch('http://localhost:3000/users/me',
-    //             {   
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Authorization': 'Bearer '+token,
-    //                 }
-    //             }
-    //         ).then(response => 
-    //             response.json().then(data => ({
-    //                 data: data,
-    //                 status: response.status
-    //             })
-    //         ).then(res => {
-    //             if(res.data){
-    //               if (res.data.user.inRoom) {
-    //                 setHasRoom(true)
-    //               }
-    //             } else {
-    //                 
-    //             }
-    //         }))
-    //   }
  
     return(
         <Flex 
@@ -75,25 +41,25 @@ const Navbar = () => {
                     alignItems="center"
                     justifyContent="center">
                     <Image 
-                    boxSize={["25px", "35px", "50px", "50px", "50px"]}
-                    src={imgurl} 
-                    mr={["2px", "8px", "8px", "8px", "8px"]}
+                        boxSize={["25px", "35px", "50px", "50px", "50px"]}
+                        src={imgurl} 
+                        mr={["2px", "8px", "8px", "8px", "8px"]}
                     />
                     <Heading 
-                    fontSize={["20px", "24px", "32px", "32px", "32px"]}
-                    mr={["20px", "24px", "32px", "32px", "32px"]}
-                    color="liteblue">litecode</Heading>
+                        fontSize={["20px", "24px", "32px", "32px", "32px"]}
+                        mr={["20px", "24px", "32px", "32px", "32px"]}
+                        color="liteblue"
+                    >litecode</Heading>
                 </Flex>
             </Link>
 
             <Spacer />
 
-            
 
             {isLoggedIn ? 
             <Fragment>
                 {hasRoom? 
-                <NavLink activeClassName="activeLink" to="/room">
+                <NavLink activeClassName="navselected" to="/room">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
@@ -102,7 +68,7 @@ const Navbar = () => {
                     >My Room</Text>
                 </NavLink>:null}
 
-                <NavLink activeClassName="activeLink" to="/allrooms">
+                <NavLink activeClassName="navselected" to="/allrooms">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
                         color="litegrey.400"
@@ -120,6 +86,7 @@ const Navbar = () => {
                     opacity="0.2"
                     onClick={logout}
                 /> */}
+
             </Fragment> :
             <Image 
                 height={["30px", "30px", "40px", "40px", "40px"]}
