@@ -15,9 +15,9 @@ router.get('/auth/google/redirect', async (req, res) => {
 
   const data = await getUserData(access_token)
 
-  // if(!data.email.endsWith(".bits-pilani.ac.in")){
-  //   return res.status(400).json({err: `Email ID is not associated with BITS`})
-  // }
+  if(!data.email.endsWith("pilani.bits-pilani.ac.in")){
+    res.redirect('https://litecode.bitsacm.in')
+  }
 
   const user = await User.findOne({ email: data.email })
 
