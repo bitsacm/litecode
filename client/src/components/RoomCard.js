@@ -245,12 +245,12 @@ const ControlledUsage = (props) => {
                     <Button 
                         onClick={props.joinRoom} 
                         color="white" 
-                        bg="#liteblue" 
-                        _hover={{ bg: "#EF7474" }}
+                        bg="liteblue" 
+                        _hover={{ bg: "liteblues" }}
                         _active={{
-                            bg: "#EF7474",
+                            bg: "liteblue",
                             transform: "scale(0.98)",
-                            borderColor: "liteblue",
+                            borderColor: "liteblues",
                         }}
                     >Join Room</Button>
                 </ButtonGroup>
