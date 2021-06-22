@@ -41,7 +41,7 @@ const RoomCard = (props) => {
     const token = authCtx.token;
 
     const joinRoom = () => {
-        fetch('http://localhost:3000/joinRoom/'+roomId,
+        fetch('https://litecode.bitsacm.in/server/joinRoom/'+roomId,
                 {   
                     method: 'POST',
                     headers: {
