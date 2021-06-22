@@ -1,7 +1,7 @@
 # Litecode
-**Discover people willing to split the cost for LeetCode Premium accounts with you @BITS-ACM.**
+[litecode.bitsacm.in](https://litecode.bitsacm.in) 
 
-![Litecode Poster](https://github.com/bitsacm/litecode/blob/master/client/public/poster.png)
+<img src="https://github.com/bitsacm/litecode/blob/master/client/public/poster.png" alt="Litecode Poster" width="600"/>
 
 ## About
 ~ 2 months before every internship season, every single CS student in the world has felt the pain of the sinking realization that they don't know how to do competitive coding. Luckily, LeetCode Premium is one of the best resources for practicing questions and attempting mock interviews. Unfortunately, it is also *obscenely* expensive unless you have an extra kidney at home.
