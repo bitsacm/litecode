@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { 
     HStack, 
     Heading,
@@ -28,7 +28,16 @@ const Navbar = () => {
     const login = () => {
         authCtx.login()
     }
- 
+
+    function roomBold(location) {
+        const pathName = location.pathname
+        if (pathName === '/room') return true
+        else return false
+    }
+
+    const location = useLocation()
+    const boldRoom = roomBold(location)
+
     return(
         <Flex 
             flexDirection="row"
@@ -62,8 +71,8 @@ const Navbar = () => {
                 <NavLink activeClassName="navselected" to="/room">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
-                        color="litegrey.400"
-                        fontWeight="medium"
+                        color={boldRoom ? "litegrey.600" : "litegrey.400"}
+                        fontWeight={boldRoom ? "bold" : "medium"}
                         marginRight={["10px", "10px", "30px", "30px", "30px"]}
                     >My Room</Text>
                 </NavLink>:null}
@@ -71,8 +80,8 @@ const Navbar = () => {
                 <NavLink activeClassName="navselected" to="/allrooms">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
-                        color="litegrey.400"
-                        fontWeight="medium"
+                        color={!boldRoom ? "litegrey.600" : "litegrey.400"}
+                        fontWeight={boldRoom ? "medium" : "bold"}
                         marginRight={["2px", "5px", "25px", "25px", "25px"]}
                     >All Rooms</Text>
                 </NavLink>

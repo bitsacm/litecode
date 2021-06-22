@@ -12,7 +12,8 @@ const theme = {
       400: "#A0AEC0",
       20: "#F7FAFC",
     },
-    litegold: "#ED8936"
+    litegold: "#ED8936",
+    litered: "#E53E3E"
   },
   fonts: {
       primary: "Roboto, sans-serif",

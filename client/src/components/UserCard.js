@@ -5,9 +5,19 @@ import {
     Text,
     Image,
     Flex,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    Button,
+    ButtonGroup,
 } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
 
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const UserCard = (props) => {
 
@@ -59,30 +69,37 @@ const UserCard = (props) => {
             >
                 <Image src={props.imgUrl} boxSize="50px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
-                    <Flex flexDirection="row" maxWidth={["180px", "250px", "300px", "300px", "300px"]} justifyContent="space-between" alignItems="center">
-                        <Heading 
-                        fontSize={["20px", "20px", "24px", "24px", "24px"]}
-                        color="litegrey.600" 
-                        isTruncated
-                        >{cleanName(props.name)}</Heading>
-                        {props.isAdmin ?
-                         <Text
-                            ml={["25px", "30px", "40px", "40px", "45px"]}
-                            bg="litegrey.600"
-                            color="white"
-                            pr="5px"
-                            pl="5px"
-                            fontSize={["12px", "12px", "18px", "18px", "18px"]}
-                            borderRadius="2px"
-                            fontWeight="medium"
-                         >ADMIN</Text> 
-                        : 
-                        <Fragment>
-                           {props.userIsAdmin ? <DeleteIcon cursor="pointer" w={5} h={5} color="litegrey.400" 
-                           ml={["55px", "55px", "80px", "80px", "80px"]}
-                           onClick={deleteUser}
-                           /> : null}
-                        </Fragment>}
+                    <Flex 
+                        flexDirection="row" 
+                        width={["180px", "250px", "300px", "300px", "300px"]} 
+                        justifyContent="space-between" 
+                        alignItems="center">
+                        <Flex 
+                            width="100%" 
+                            justifyContent="space-between" 
+                            alignItems="center">
+                                <Heading 
+                                    fontSize={["20px", "20px", "24px", "24px", "24px"]}
+                                    color="litegrey.600" 
+                                    isTruncated
+                                >{cleanName(props.name)}</Heading>
+                            
+                            {props.isAdmin ?
+                            <Text
+                                ml={["25px", "30px", "40px", "40px", "45px"]}
+                                bg="litegrey.600"
+                                color="white"
+                                pr="5px"
+                                pl="5px"
+                                fontSize={["12px", "12px", "18px", "18px", "18px"]}
+                                borderRadius="2px"
+                                fontWeight="medium"
+                            >ADMIN</Text> 
+                            : <Fragment>
+                            {props.userIsAdmin ? 
+                               <ControlledUsage deleteUser={deleteUser} /> : null}
+                            </Fragment>}
+                        </Flex>
                     </Flex>
                     <Text fontSize="20px" color="litegrey.400" fontWeight="medium">{props.phoneNo}</Text>
                 </Flex>
@@ -90,5 +107,57 @@ const UserCard = (props) => {
         </Fragment>
     )
 }
+
+
+const ControlledUsage = (props) => {
+    const [isOpen, setIsOpen] = React.useState(false)
+    const open = () => setIsOpen(!isOpen)
+    const close = () => setIsOpen(false)
+    return (
+      <>
+        <Fragment>
+            <DeleteIcon 
+                cursor="pointer" w={5} h={5} 
+                color="litered" 
+                _hover={{ color: "#EF7474" }}
+                ml={["55px", "55px", "80px", "80px", "80px"]}
+                onClick={open}
+            /> 
+            <Popover
+                returnFocusOnClose={false}
+                isOpen={isOpen}
+                onClose={close}
+                placement="right"
+                closeOnBlur={false}
+            >
+            <PopoverContent>
+                <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody color="litegrey.400">
+                    Are you sure you want to remove this member from the room? This action cannot be undone.
+                </PopoverBody>
+                <PopoverFooter d="flex" justifyContent="flex-end">
+                <ButtonGroup size="sm">
+                    <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
+                    <Button 
+                        onClick={props.deleteUser} 
+                        color="white" 
+                        bg="#E53E3E" 
+                        _hover={{ bg: "#EF7474" }}
+                        _active={{
+                            bg: "#EF7474",
+                            transform: "scale(0.98)",
+                            borderColor: "red",
+                        }}
+                    >Remove</Button>
+                </ButtonGroup>
+                </PopoverFooter>
+            </PopoverContent>
+            </Popover>
+        </Fragment>
+      </>
+    )
+  }
 
 export default UserCard;

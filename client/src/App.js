@@ -27,7 +27,7 @@ function App() {
   const isLoggedIn = authCtx.isLoggedIn
 
   const [mobile, setMobile] = useState("dummy");
-  const [inRoom, setInRoom] = useState("dummy");
+  const [inRoom, setInRoom] = useState(null);
 
 
   useEffect(() => {

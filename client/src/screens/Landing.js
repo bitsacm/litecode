@@ -96,7 +96,7 @@ const Landing = () => {
                 <Button 
                     color="white" 
                     bg="liteblue" 
-                    mt="20px" 
+                    mt="80px" 
                     fontSize="24px" 
                     width="250px" 
                     minHeight="50px" 
