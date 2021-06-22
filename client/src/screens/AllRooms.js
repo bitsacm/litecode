@@ -194,7 +194,7 @@ const AllRooms = (props) => {
             
             <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
                 {allRooms ? 
-                <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "flex-start"]} alignItems="center" flexWrap="wrap" marginTop="10px">
+                <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "center"]} alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
                         <RoomCard userRoom={userRoom} updateRedirect={updateRedirect} isBanned={isBanned} room={room} />
                     ))}
