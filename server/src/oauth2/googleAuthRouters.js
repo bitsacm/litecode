@@ -15,7 +15,7 @@ router.get('/auth/google/redirect', async (req, res) => {
 
   const data = await getUserData(access_token)
 
-  if(!data.email.endsWith("pilani.bits-pilani.ac.in")){
+  if(!data.email.endsWith("bits-pilani.ac.in")){
     return res.redirect('https://litecode.bitsacm.in')
   }
 

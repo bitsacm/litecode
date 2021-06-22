@@ -20,7 +20,7 @@ const googleLoginUrl = oauth2Client.generateAuthUrl({
     ],
     response_type: 'code',
     prompt: 'consent',
-    hd: 'pilani.bits-pilani.ac.in'
+    hd: 'bits-pilani.ac.in'
 })
 
 const getAccessTokenFromCode = async (code) => {

@@ -39,11 +39,13 @@ const roomSchema = new mongoose.Schema({
 
 roomSchema.pre('save', async function (next) {
     if(this.usersInRoom){
-        this.costPerMember = (process.env.LITECODE_PRICE)/(this.usersInRoom)
+        const price = Math.trunc((process.env.LITECODE_PRICE)/(this.usersInRoom))
+        this.costPerMember = Math.ceil(price/ 10) * 10
     } else{
         this.costPerMember = process.env.LITECODE_PRICE
     }
-    this.toPay = (process.env.LITECODE_PRICE)/(this.usersInRoom + 1)
+    const priceToPay = Math.trunc((process.env.LITECODE_PRICE)/(this.usersInRoom + 1))
+    this.toPay = Math.ceil(priceToPay/ 10) * 10
     next()
 })
 
