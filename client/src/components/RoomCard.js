@@ -7,7 +7,16 @@ import {
     Image,
     Flex,
     Box,
-    Button
+    Button,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    ButtonGroup,
 } from '@chakra-ui/react'
 
 import {
@@ -147,22 +156,8 @@ const RoomCard = (props) => {
                                 color="litegrey.600"
                                 mb="30px"
                                 >₹ {props.room.toPay}</Heading>
-                                <Button 
-                                bg="liteblue" 
-                                width="150px" 
-                                borderRadius="10" 
-                                mb="20px" 
-                                color="white" 
-                                isDisabled={(props.userRoom || props.isBanned)}
-                                _hover={{ bg: "#81C8DC" }}
-                                _active={{
-                                    bg: "#81C8DC",
-                                    transform: "scale(0.98)",
-                                    borderColor: "liteblue",
-                                }}
-                                onClick={joinRoom}>
-                                    Join Group
-                                    </Button>
+                                <ControlledUsage userRoom={props.userRoom} isBanned={props.isBanned} joinRoom={joinRoom} />
+
                                 {(props.userRoom) ? 
                                 <Fragment>
                                     {props.userRoom === props.room.roomID ? 
@@ -204,5 +199,67 @@ const RoomCard = (props) => {
         </Fragment>
     )
 }
+
+
+
+const ControlledUsage = (props) => {
+    const [isOpen, setIsOpen] = React.useState(false)
+    const open = () => setIsOpen(!isOpen)
+    const close = () => setIsOpen(false)
+    return (
+      <>
+        <Fragment>
+            <Button 
+            bg="liteblue" 
+            width="150px" 
+            borderRadius="10" 
+            mb="20px" 
+            color="white" 
+            isDisabled={(props.userRoom || props.isBanned)}
+            _hover={{ bg: "#81C8DC" }}
+            _active={{
+                bg: "#81C8DC",
+                transform: "scale(0.98)",
+                borderColor: "liteblue",
+            }}
+            onClick={open}>
+                Join Group
+                </Button> 
+            <Popover
+                returnFocusOnClose={false}
+                isOpen={isOpen}
+                onClose={close}
+                placement="right"
+                closeOnBlur={false}
+            >
+            <PopoverContent>
+                <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody color="litegrey.400">
+                    Are you sure you want to join this room? If you leave this room after joining, you will be banned for 48 hours.
+                </PopoverBody>
+                <PopoverFooter d="flex" justifyContent="flex-end">
+                <ButtonGroup size="sm">
+                    <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
+                    <Button 
+                        onClick={props.joinRoom} 
+                        color="white" 
+                        bg="#liteblue" 
+                        _hover={{ bg: "#EF7474" }}
+                        _active={{
+                            bg: "#EF7474",
+                            transform: "scale(0.98)",
+                            borderColor: "liteblue",
+                        }}
+                    >Join Room</Button>
+                </ButtonGroup>
+                </PopoverFooter>
+            </PopoverContent>
+            </Popover>
+        </Fragment>
+      </>
+    )
+  }
 
 export default RoomCard;

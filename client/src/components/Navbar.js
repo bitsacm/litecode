@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { 
     HStack, 
     Heading,
@@ -16,7 +16,7 @@ import imgurl from '../resources/img/keyboard.png'
 import acmlogo from '../resources/img/acmlogo.png'
 import logoutpng from '../resources/img/logout.png'
 
-import '../index.css'
+import './Nav.css'
 
 const Navbar = () => {
     const authCtx = useContext(AuthContext);
@@ -25,44 +25,19 @@ const Navbar = () => {
 
     const [hasRoom, setHasRoom] = useState(true);
 
-    // useEffect(()=>{
-    //     doesHaveRoom()
-    // })
-
-    // const logout = () => {
-    //     authCtx.logout()
-    //     window.location.reload();
-    // }
-
     const login = () => {
         authCtx.login()
     }
 
-    // const doesHaveRoom = () => {
-    //     fetch('https://litecode.bitsacm.in/server/users/me',
-    //             {   
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Authorization': 'Bearer '+token,
-    //                 }
-    //             }
-    //         ).then(response => 
-    //             response.json().then(data => ({
-    //                 data: data,
-    //                 status: response.status
-    //             })
-    //         ).then(res => {
-    //             if(res.data){
-    //               if (res.data.user.inRoom) {
-    //                 setHasRoom(true)
-    //               }
-    //             } else {
-    //                 
-    //             }
-    //         }))
-    //   }
- 
+    function roomBold(location) {
+        const pathName = location.pathname
+        if (pathName === '/room') return true
+        else return false
+    }
+
+    const location = useLocation()
+    const boldRoom = roomBold(location)
+
     return(
         <Flex 
             flexDirection="row"
@@ -75,38 +50,38 @@ const Navbar = () => {
                     alignItems="center"
                     justifyContent="center">
                     <Image 
-                    boxSize={["25px", "35px", "50px", "50px", "50px"]}
-                    src={imgurl} 
-                    mr={["2px", "8px", "8px", "8px", "8px"]}
+                        boxSize={["25px", "35px", "50px", "50px", "50px"]}
+                        src={imgurl} 
+                        mr={["2px", "8px", "8px", "8px", "8px"]}
                     />
                     <Heading 
-                    fontSize={["20px", "24px", "32px", "32px", "32px"]}
-                    mr={["20px", "24px", "32px", "32px", "32px"]}
-                    color="liteblue">litecode</Heading>
+                        fontSize={["20px", "24px", "32px", "32px", "32px"]}
+                        mr={["20px", "24px", "32px", "32px", "32px"]}
+                        color="liteblue"
+                    >litecode</Heading>
                 </Flex>
             </Link>
 
             <Spacer />
 
-            
 
             {isLoggedIn ? 
             <Fragment>
                 {hasRoom? 
-                <NavLink activeClassName="activeLink" to="/room">
+                <NavLink activeClassName="navselected" to="/room">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
-                        color="litegrey.400"
-                        fontWeight="medium"
+                        color={boldRoom ? "litegrey.600" : "litegrey.400"}
+                        fontWeight={boldRoom ? "bold" : "medium"}
                         marginRight={["10px", "10px", "30px", "30px", "30px"]}
                     >My Room</Text>
                 </NavLink>:null}
 
-                <NavLink activeClassName="activeLink" to="/allrooms">
+                <NavLink activeClassName="navselected" to="/allrooms">
                     <Text
                         fontSize={["16px", "18px", "22px", "22px", "22px"]}
-                        color="litegrey.400"
-                        fontWeight="medium"
+                        color={!boldRoom ? "litegrey.600" : "litegrey.400"}
+                        fontWeight={boldRoom ? "medium" : "bold"}
                         marginRight={["2px", "5px", "25px", "25px", "25px"]}
                     >All Rooms</Text>
                 </NavLink>
@@ -120,6 +95,7 @@ const Navbar = () => {
                     opacity="0.2"
                     onClick={logout}
                 /> */}
+
             </Fragment> :
             <Image 
                 height={["30px", "30px", "40px", "40px", "40px"]}

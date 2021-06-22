@@ -150,7 +150,7 @@ const Room = () => {
                 marginTop="40px"
                 fontSize="32px"
                 color="litegrey.600"
-            >🥺 It's lonely here. Invite your friends!</Heading> :
+            >🤙 Invite a friend!</Heading> :
             <Heading 
                 marginLeft="10px" 
                 marginTop="40px"
@@ -168,7 +168,7 @@ const Room = () => {
                 alignItems="start"
                 flexDirection="row" 
                 mt="30px" 
-                width={["100%", "100%", "70%", "70%", "70%"]}
+                width={["100%", "100%", "80%", "80%", "80%"]}
                 flexWrap="wrap"
             >
                 {roomDetails.room.users.map((user, index)=>(
@@ -187,7 +187,7 @@ const Room = () => {
         <Box 
             display="flex" 
             flexDir="column" 
-            width={["100%", "100%", "30%", "30%", "30%"]} 
+            width={["100%", "100%", "20%", "20%", "20%"]} 
             m="0" 
             p="0"
             ml={["10px", "30px", "0px", "0px", "0px"]}

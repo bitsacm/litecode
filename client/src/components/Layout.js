@@ -6,8 +6,8 @@ import Navbar from './Navbar'
 const Layout = (props) => {
     return (
       <Box mt="30px" mb="30px" 
-        mr={["30px", "30px", "80px", "80px", "80px"]} 
-        ml={["30px", "30px", "80px", "80px", "80px"]} 
+        mr={["30px", "30px", "120px", "120px", "120px"]} 
+        ml={["30px", "30px", "120px", "120px", "120px"]} 
       >
         <Navbar />
         <main>{props.children}</main>
