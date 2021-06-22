@@ -13,7 +13,11 @@ import {
 import {
     Link
 } from 'react-router-dom'
+
 import AuthContext from '../store/auth'
+
+import { Star } from 'react-github-buttons'
+import GitHubButton from 'react-github-btn'
 
 import landingImg from '../resources/img/landing.png'
 import landingImg1 from '../resources/img/landingImg1.jpg'
@@ -41,20 +45,22 @@ const Landing = () => {
                     status: response.status
                 })
             ).then(res => {
+                console.log(res)
                 if(res.data){
                     const url = res.data.googleLoginUrl
                     window.location.href = url;
                 } else {
-                    alert("ERROR RETRIEVING CONTENT.");
+                    alert("Error handling.")
                 }
             }))
     }
 
     return(
         <Flex
-            flexDirection={["column", "column", "row", "row", "row"]}
+            flexDirection={["column", "column", "row", "row", "row", "row"]}
             width="100%" 
             mt="30px" 
+            height="80vh"
             justifyContent="space-between"
             alignItems="center"
         >
@@ -66,60 +72,74 @@ const Landing = () => {
             >
                 
                 <Heading
+                    mt={["50px", "50px", "0px", "0px", "0px"]} 
                     pt={["80px", "80px", "0px", "0px", "0px"]} 
-                    fontSize="44px"
+                    fontSize={["44px", "44px", "44px", "44px", "44px", "54px"]} 
                     color="litegrey.600"
                 >Share Leetcode</Heading>
 
                 <Heading
                     mt="-5px"
-                    fontSize="44px"
+                    fontSize={["44px", "44px", "44px", "44px", "44px", "54px"]} 
                     color="litegrey.600"
                 >premium accounts.</Heading>
 
                 <Text
                     mt="10px"
                     color="litegrey.400"
-                    fontSize="24px"
+                    width="80%"
+                    fontSize={["24px", "24px", "24px", "24px", "24px", "34px"]} 
                     fontWeight="medium"
                 >Discover people willing to split the cost for LeetCode Premium accounts with you.</Text>
                 
-                <Flex flexDirection="row" mt="30px" mb="20px" alignItems="center">
-                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="0px" border="2px" borderColor="liteblue" src={landingImg1} />
-                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg2} />
-                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg3} />
-                    <Image boxSize="50px" borderRadius="100%" objectFit="cover" ml="-10px" border="2px" borderColor="liteblue" src={landingImg4} />
+                <Flex flexDirection="row" mt="30px" ml="15px" mb="20px" alignItems="center">
+                    <Image boxSize={["50px", "50px", "50px", "50px", "50px", "65px"]} borderRadius="100%" objectFit="cover" ml="-15px" border="2px" borderColor="liteblue" src={landingImg1} />
+                    <Image boxSize={["50px", "50px", "50px", "50px", "50px", "65px"]} borderRadius="100%" objectFit="cover" ml="-15px" border="2px" borderColor="liteblue" src={landingImg2} />
+                    <Image boxSize={["50px", "50px", "50px", "50px", "50px", "65px"]} borderRadius="100%" objectFit="cover" ml="-15px" border="2px" borderColor="liteblue" src={landingImg3} />
+                    <Image boxSize={["50px", "50px", "50px", "50px", "50px", "65px"]} borderRadius="100%" objectFit="cover" ml="-15px" border="2px" borderColor="liteblue" src={landingImg4} />
                     <Text mr="20px" ml="20px">+</Text>
                     <Image boxSize="50px" borderRadius="100%" objectFit="cover" border="2px" borderColor="litegold" src={landingImg5} />
                 </Flex>
-                
-                <Button 
-                    color="white" 
-                    bg="liteblue" 
-                    mt="80px" 
-                    fontSize="24px" 
-                    width="250px" 
-                    minHeight="50px" 
-                    borderRadius="12px"
-                    onClick={login}
-                    _hover={{ bg: "#81C8DC" }}
-                    _active={{
-                        bg: "#81C8DC",
-                        transform: "scale(0.98)",
-                        borderColor: "liteblue",
-                    }}
-                >Create an account ;)</Button>
+
+                <Flex flexDirection="column" justifyContent="flex-start">
+                    <Button 
+                        color="white" 
+                        bg="liteblue" 
+                        mt="80px"
+                        mb="20px"
+                        fontSize="24px" 
+                        width="250px" 
+                        minHeight="50px" 
+                        borderRadius="12px"
+                        onClick={login}
+                        _hover={{ bg: "#81C8DC" }}
+                        _active={{
+                            bg: "#81C8DC",
+                            transform: "scale(0.98)",
+                            borderColor: "liteblue",
+                        }}
+                    >Create an account ;)</Button>
+
+                    <GitHubButton
+                        href="https://github.com/bitsacm/litecode"
+                        data-icon="octicon-star" 
+                        data-size="large" 
+                        data-show-count="true" 
+                        aria-label="Star bitsacm/litecode on GitHub">
+                            Star this on GitHub!
+                    </GitHubButton>
+                </Flex>
             </Flex>
 
             <Flex 
             width="50%"
             display={["none", "none", "flex", "flex", "flex"]} 
-            justifyContent="center" 
+            justifyContent="flex-end" 
             alignItems="center">
                 <Image 
                 ml="25px"
-                mr="25px"
-                boxSize={["350px", "350px", "450px", "450px", "450px"]}
+                mr="100px"
+                boxSize={["350px", "350px", "450px", "450px", "450px", "600px"]}
                 objectFit="cover" src={landingImg} />
             </Flex>
         </Flex>
