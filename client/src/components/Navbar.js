@@ -83,7 +83,7 @@ const Navbar = () => {
                         color={!boldRoom ? "litegrey.600" : "litegrey.400"}
                         fontWeight={boldRoom ? "medium" : "bold"}
                         marginRight={["2px", "5px", "25px", "25px", "25px"]}
-                    >All Rooms</Text>
+                    >Open Rooms</Text>
                 </NavLink>
 
                 {/* <Image 

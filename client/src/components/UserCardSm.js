@@ -25,7 +25,7 @@ const UserCardSm = (props) => {
                 <Image src={props.user.avatar} boxSize="30px" borderRadius="100%" marginRight="20px"/>
                 <Flex flexDirection="column">
                     <Flex flexDirection="row" justifyContent="space-between" alignItems="center">
-                        <Heading fontSize="18px" color="litegrey.600">{props.user.name}</Heading>
+                        <Heading fontSize="18px" isTruncated color="litegrey.600">{props.user.name}</Heading>
                         {props.user.isAdmin ?
                          <Text
                             ml="10px"
