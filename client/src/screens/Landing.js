@@ -32,7 +32,7 @@ const Landing = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     const login = () => {
-        fetch('https://litecode.bitsacm.in/server/auth/google/',
+        fetch('http://localhost:3000/auth/google/',
                 {   
                     method: 'GET',
                     headers: {
