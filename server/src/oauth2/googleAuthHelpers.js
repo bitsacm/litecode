@@ -19,8 +19,7 @@ const googleLoginUrl = oauth2Client.generateAuthUrl({
         'https://www.googleapis.com/auth/userinfo.profile'
     ],
     response_type: 'code',
-    prompt: 'consent',
-    hd: 'bits-pilani.ac.in'
+    prompt: 'consent'
 })
 
 const getAccessTokenFromCode = async (code) => {
