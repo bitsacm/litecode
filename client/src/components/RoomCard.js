@@ -73,14 +73,17 @@ const RoomCard = (props) => {
                 margin={["0px", "0px", "10px", "10px", "10px"]}
                 mb={["10px", "10px", "0px", "0px", "0px"]}
                 bg="litegrey.20" 
-                width={["100%", "400px", "400px", "400px", "400px"]}
+                width={["100%", "350px", "350px", "370px", "370px"]}
                 borderRadius="10px"
 
             >
+                <Flex 
+                    width="100%">
                 <Heading
                     fontSize="28px"
                     color="litegrey.600"
-                >{props.room.roomID}</Heading>
+                    isTruncated
+                >{props.room.roomID}</Heading></Flex>
                 {props.room.users ? 
                 <Box margin="0px">
                     <Flex flexDirection="row">

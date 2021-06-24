@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import UserCard from '../components/UserCard.js'
 import { 
     Flex, 
+    useDisclosure,
     Box, 
     Heading, 
     Text, 
@@ -17,7 +18,15 @@ import {
     PopoverBody,
     PopoverFooter,
     PopoverArrow,
-    PopoverCloseButton, } from '@chakra-ui/react'
+    PopoverCloseButton,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+ } from '@chakra-ui/react'
 import { DummyData } from '../resources/dummy.js'
 import { Redirect, Link } from 'react-router-dom'
 
@@ -137,6 +146,8 @@ const Room = () => {
         setRedirect("non-null")
     }
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
 
     return(
         <Fragment>
@@ -250,35 +261,43 @@ const Room = () => {
                 ? 
                     <Fragment> 
                         {roomDetails.room.roomLocked ? 
+                            <>
                             <Button 
                                 bg="liteblue" 
                                 width={["120px", "150px", "150px", "150px", "150px"]}
                                 mb="10px" 
                                 mr="20px"
                                 color="white" 
-                                onClick={lockRoom}
+                                onClick={onOpen}
                                 _hover={{ bg: "#81C8DC" }}
                                 _active={{
                                     bg: "#81C8DC",
                                     transform: "scale(0.98)",
                                     borderColor: "liteblue",
                                 }}
-                            >Unlock Group</Button> 
+                            > 🥳 Let's code</Button> 
+                    
+                            <Modal isOpen={isOpen} onClose={onClose}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                <ModalHeader color="litegrey.600" fontSize="28px">It's time to start coding.</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>
+                                    <Text weight="medium" fontSize="18px" color="litegrey.400">
+                                        Hey there, @Admin! This is now your final Litecode group. You should be able to see everyone's mobile numbers — just create a WhatsApp group with all of them, split the bill, make the purchase, and start Litecoding!
+                                    </Text>
+                                </ModalBody>
+                    
+                                <ModalFooter>
+                                    <Button colorScheme="gray" mr={3} onClick={onClose}>
+                                    Close
+                                    </Button>
+                                </ModalFooter>
+                                </ModalContent>
+                            </Modal>
+                            </>
                         : 
-                            <Button 
-                                bg="liteblue" 
-                                width={["120px", "150px", "150px", "150px", "150px"]}
-                                mr="20px"
-                                mb="10px" 
-                                color="white" 
-                                onClick={lockRoom}
-                                _hover={{ bg: "#81C8DC" }}
-                                _active={{
-                                    bg: "#81C8DC",
-                                    transform: "scale(0.98)",
-                                    borderColor: "liteblue",
-                                }}
-                            >Lock Group</Button>
+                            <ControlledUsageS2 lockRoom={lockRoom}/>
                         }
                         </Fragment>
                 :   null}
@@ -367,5 +386,66 @@ const ControlledUsage = (props) => {
       </>
     )
   }
+
+
+  const ControlledUsageS2 = (props) => {
+    const [isOpen, setIsOpen] = React.useState(false)
+    const open = () => setIsOpen(!isOpen)
+    const close = () => setIsOpen(false)
+    return (
+      <>
+        <Fragment>
+            <Button 
+                width={["120px", "150px", "150px", "150px", "150px"]}
+                mr="20px"
+                mb="10px" 
+                onClick={open}
+                bg="liteblue" 
+                color="white" 
+                _hover={{ bg: "#81C8DC" }}
+                _active={{
+                    bg: "#81C8DC",
+                    transform: "scale(0.98)",
+                    borderColor: "liteblue",
+                }}
+            >Lock Group</Button>
+            <Popover
+            returnFocusOnClose={false}
+            isOpen={isOpen}
+            onClose={close}
+            placement="right"
+            closeOnBlur={false}
+            >
+            <PopoverContent>
+                <PopoverHeader fontWeight="semibold" color="litegrey.600">Confirmation</PopoverHeader>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverBody color="litegrey.400">
+                Are you sure you want to lock the room? This will be your final Litecode group.
+                </PopoverBody>
+                <PopoverFooter d="flex" justifyContent="flex-end">
+                <ButtonGroup size="sm">
+                    <Button color="litegrey.400" variant="outline" onClick={close}>Cancel</Button>
+                    <Button 
+                        onClick={props.lockRoom} 
+                        bg="liteblue" 
+                        color="white" 
+                        _hover={{ bg: "#81C8DC" }}
+                        _active={{
+                            bg: "#81C8DC",
+                            transform: "scale(0.98)",
+                            borderColor: "liteblue",
+                        }}
+                    >Lock Room</Button>
+                </ButtonGroup>
+                </PopoverFooter>
+            </PopoverContent>
+            </Popover>
+        </Fragment>
+      </>
+    )
+  }
+
+
 
 export default Room;

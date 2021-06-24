@@ -194,7 +194,7 @@ const AllRooms = (props) => {
             
             <Box display="flex" justifyContent="center" alignItems="center" margin="auto" width="100%" >
                 {allRooms ? 
-                <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "center"]} alignItems="center" flexWrap="wrap" marginTop="10px">
+                <Flex margin="auto" flexDirection="row" width="100%" justifyContent={["center", "center", "center", "center", "flex-start"]} alignItems="center" flexWrap="wrap" marginTop="10px">
                     {allRooms.map((room, index)=>(
                         <RoomCard userRoom={userRoom} updateRedirect={updateRedirect} isBanned={isBanned} room={room} />
                     ))}
@@ -212,17 +212,19 @@ const InitialFocus = (props) =>  {
     const { isOpen, onOpen, onClose } = useDisclosure()
   
     const initialRef = React.useRef()
-    const nameRef = React.useRef()
+    const [nameRef, setNameRef] = useState("")
     const finalRef = React.useRef()
 
     const authCtx = useContext(AuthContext);
     const token = authCtx.token;
+
+    const handleChange = (event) => setNameRef(event.target.value)
    
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        const name = nameRef.current.value;
+        const name = nameRef;
 
         fetch('https://litecode.bitsacm.in/server/createRoom?roomName='+name,
                 {
@@ -278,7 +280,14 @@ const InitialFocus = (props) =>  {
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel color="litegrey.600">Add a Room Name</FormLabel>
-                <Input type="text" ref={nameRef} fontWeight="500" placeholder="Litecode by ACM" />
+                <Input 
+                    type="text" 
+                    borderColor="liteblue"
+                    onChange={handleChange} 
+                    isInvalid={ nameRef.includes(',') || nameRef.includes('.') || nameRef.includes('/') || nameRef.includes('\\') || nameRef.includes('%')  || nameRef.includes('?')  || nameRef.includes('!')  || nameRef.includes('>')  || nameRef.includes('<')  || nameRef.includes('|')  || nameRef.includes('$')  || nameRef.includes('#')  || nameRef.includes('*')  || nameRef.includes('@')} 
+                    errorBorderColor="red.300"
+                    placeholder="Litecode by ACM" 
+                />
               </FormControl>
             </ModalBody>
   
@@ -293,6 +302,7 @@ const InitialFocus = (props) =>  {
                 }}
                 bg="liteblues" 
                 color="liteblue" 
+                isDisabled={ nameRef.includes(',') || nameRef.includes('.') || nameRef.includes('/') || nameRef.includes('\\') || nameRef.includes('%')  || nameRef.includes('?')  || nameRef.includes('!')  || nameRef.includes('>')  || nameRef.includes('<')  || nameRef.includes('|')  || nameRef.includes('$')  || nameRef.includes('#')  || nameRef.includes('*')  || nameRef.includes('@')}
                 mr={3}
                 >Create
               </Button>

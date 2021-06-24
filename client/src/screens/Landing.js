@@ -32,7 +32,7 @@ const Landing = () => {
     const isLoggedIn = authCtx.isLoggedIn;
 
     const login = () => {
-        fetch('https://litecode.bitsacm.in/server/auth/google/',
+        fetch('http://localhost:3000/auth/google/',
                 {   
                     method: 'GET',
                     headers: {
@@ -57,16 +57,16 @@ const Landing = () => {
 
     return(
         <Flex
-            flexDirection={["column", "column", "row", "row", "row", "row"]}
+            flexDirection={["column", "column", "column", "row", "row", "row"]}
             width="100%" 
-            mt="30px" 
+            mt={["30px", "30px", "100px", "30px", "30px", "30px"]}
             height="80vh"
             justifyContent="space-between"
             alignItems="center"
         >
             <Flex 
                 flexDirection="column" 
-                width={["100%", "100%", "50%", "50%", "50%"]} 
+                width={["100%", "100%", "100%", "50%", "50%", "50%"]} 
                 height="500px"
                 justifyContent="center"
             >
@@ -105,8 +105,7 @@ const Landing = () => {
                     <Button 
                         color="white" 
                         bg="liteblue" 
-                        mt="80px"
-                        mb="20px"
+                        mt="60px"
                         fontSize="24px" 
                         width="250px" 
                         minHeight="50px" 
@@ -119,6 +118,15 @@ const Landing = () => {
                             borderColor: "liteblue",
                         }}
                     >Create an account ;)</Button>
+
+                    <Text
+                        mt="10px"
+                        mb="30px"
+                        color="litegrey.400"
+                        width="80%"
+                        fontSize={["20px", "20px", "20px", "20px", "20px", "28px"]} 
+                        fontWeight="medium"
+                    >Sign up with your BITS email.</Text>
 
                     <GitHubButton
                         href="https://github.com/bitsacm/litecode"
@@ -133,13 +141,13 @@ const Landing = () => {
 
             <Flex 
             width="50%"
-            display={["none", "none", "flex", "flex", "flex"]} 
+            display={["none", "none", "none", "flex", "flex", "flex"]} 
             justifyContent="flex-end" 
             alignItems="center">
                 <Image 
                 ml="25px"
                 mr="100px"
-                boxSize={["350px", "350px", "450px", "450px", "450px", "600px"]}
+                boxSize={["350px", "350px", "350px", "350px", "450px", "600px"]}
                 objectFit="cover" src={landingImg} />
             </Flex>
         </Flex>
